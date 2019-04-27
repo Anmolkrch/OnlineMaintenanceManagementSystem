@@ -1,0 +1,44 @@
+﻿
+@{
+    Quiz.ViewModel.UserViewModel userConnected = Session["UserConnected"] as Quiz.ViewModel.UserViewModel;
+    Quiz.ViewModel.SubjectViewModel quizSelected = Session["SelectedQuiz"] as Quiz.ViewModel.SubjectViewModel;
+
+}
+
+
+    @if (userConnected != null)
+    {
+        <div class="row">
+
+            <div class="col-md-4">
+                @if (!string.IsNullOrEmpty(userConnected.ProfilePic))
+                {
+            <img src="@string.Format("{0}{1}", Url.Content("~/images/"), userConnected.ProfilePic)" class="img-circle" style="width: 12%;" />
+        }
+                <img src="@string.Format("{0}{1}", Url.Content("~/images/"), "sara.png")" class="img-circle" style="width: 12%;" />
+                <span> <b>Welcome :</b> @userConnected.UserName </span>
+            </div>
+
+            <div class="col-md-4" style="margin-top: 15px;">
+
+                @if ( quizSelected != null && !string.IsNullOrEmpty(quizSelected.SubjectCode))
+                {
+                    <span> <b>Subject Selected :</b> @quizSelected.SubjectCode</span>
+                }
+                else
+                {
+                    <span> <b>Please Select your Quiz </b></span>
+                }
+
+            </div>
+
+            <div class="col-md-4" style="margin-top: 15px;">
+                <span> <b>Date :</b> @DateTime.Now</span>
+            </div>
+
+        </div>
+    }
+
+   
+
+

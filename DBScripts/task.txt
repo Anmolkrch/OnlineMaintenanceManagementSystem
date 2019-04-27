@@ -1,0 +1,34 @@
+﻿https://edgetechnosoft.com/iec/subject/index
+iec
+ADMIN@54321
+
+----------Admin---------
+Dashboard
+Student
+Counsellor  -Not Required
+Professor  -Not Required
+Course
+Subject
+LMS
+Exam
+Result
+Account -Not Required
+Notice
+Import
+User
+Setting
+
+
+https://edgetechnosoft.com/iec/subject/index
+demo1
+demo1
+
+
+----------Student---------
+Dashboard
+Subject
+LMS
+Exam
+Assignment
+Fee
+Notice
