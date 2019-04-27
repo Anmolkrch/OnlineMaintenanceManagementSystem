@@ -1,237 +1,115 @@
-﻿GO
-ALTER DATABASE [QuizApp] SET COMPATIBILITY_LEVEL = 110
+﻿USE [master]
+GO
+/****** Object:  Database [ServiceMaintainance]    Script Date: 27-04-2019 20:32:28 ******/
+CREATE DATABASE [ServiceMaintainance]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'ServiceMaintainance', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\ServiceMaintainance.mdf' , SIZE = 3136KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+ LOG ON 
+( NAME = N'ServiceMaintainance_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL11.MSSQLSERVER\MSSQL\DATA\ServiceMaintainance_log.ldf' , SIZE = 832KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+GO
+ALTER DATABASE [ServiceMaintainance] SET COMPATIBILITY_LEVEL = 110
 GO
 IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
 begin
-EXEC [QuizApp].[dbo].[sp_fulltext_database] @action = 'enable'
+EXEC [ServiceMaintainance].[dbo].[sp_fulltext_database] @action = 'enable'
 end
 GO
-ALTER DATABASE [QuizApp] SET ANSI_NULL_DEFAULT OFF 
+ALTER DATABASE [ServiceMaintainance] SET ANSI_NULL_DEFAULT OFF 
 GO
-ALTER DATABASE [QuizApp] SET ANSI_NULLS OFF 
+ALTER DATABASE [ServiceMaintainance] SET ANSI_NULLS OFF 
 GO
-ALTER DATABASE [QuizApp] SET ANSI_PADDING OFF 
+ALTER DATABASE [ServiceMaintainance] SET ANSI_PADDING OFF 
 GO
-ALTER DATABASE [QuizApp] SET ANSI_WARNINGS OFF 
+ALTER DATABASE [ServiceMaintainance] SET ANSI_WARNINGS OFF 
 GO
-ALTER DATABASE [QuizApp] SET ARITHABORT OFF 
+ALTER DATABASE [ServiceMaintainance] SET ARITHABORT OFF 
 GO
-ALTER DATABASE [QuizApp] SET AUTO_CLOSE OFF 
+ALTER DATABASE [ServiceMaintainance] SET AUTO_CLOSE ON 
 GO
-ALTER DATABASE [QuizApp] SET AUTO_SHRINK OFF 
+ALTER DATABASE [ServiceMaintainance] SET AUTO_SHRINK OFF 
 GO
-ALTER DATABASE [QuizApp] SET AUTO_UPDATE_STATISTICS ON 
+ALTER DATABASE [ServiceMaintainance] SET AUTO_UPDATE_STATISTICS ON 
 GO
-ALTER DATABASE [QuizApp] SET CURSOR_CLOSE_ON_COMMIT OFF 
+ALTER DATABASE [ServiceMaintainance] SET CURSOR_CLOSE_ON_COMMIT OFF 
 GO
-ALTER DATABASE [QuizApp] SET CURSOR_DEFAULT  GLOBAL 
+ALTER DATABASE [ServiceMaintainance] SET CURSOR_DEFAULT  GLOBAL 
 GO
-ALTER DATABASE [QuizApp] SET CONCAT_NULL_YIELDS_NULL OFF 
+ALTER DATABASE [ServiceMaintainance] SET CONCAT_NULL_YIELDS_NULL OFF 
 GO
-ALTER DATABASE [QuizApp] SET NUMERIC_ROUNDABORT OFF 
+ALTER DATABASE [ServiceMaintainance] SET NUMERIC_ROUNDABORT OFF 
 GO
-ALTER DATABASE [QuizApp] SET QUOTED_IDENTIFIER OFF 
+ALTER DATABASE [ServiceMaintainance] SET QUOTED_IDENTIFIER OFF 
 GO
-ALTER DATABASE [QuizApp] SET RECURSIVE_TRIGGERS OFF 
+ALTER DATABASE [ServiceMaintainance] SET RECURSIVE_TRIGGERS OFF 
 GO
-ALTER DATABASE [QuizApp] SET  DISABLE_BROKER 
+ALTER DATABASE [ServiceMaintainance] SET  ENABLE_BROKER 
 GO
-ALTER DATABASE [QuizApp] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+ALTER DATABASE [ServiceMaintainance] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
 GO
-ALTER DATABASE [QuizApp] SET DATE_CORRELATION_OPTIMIZATION OFF 
+ALTER DATABASE [ServiceMaintainance] SET DATE_CORRELATION_OPTIMIZATION OFF 
 GO
-ALTER DATABASE [QuizApp] SET TRUSTWORTHY OFF 
+ALTER DATABASE [ServiceMaintainance] SET TRUSTWORTHY OFF 
 GO
-ALTER DATABASE [QuizApp] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+ALTER DATABASE [ServiceMaintainance] SET ALLOW_SNAPSHOT_ISOLATION OFF 
 GO
-ALTER DATABASE [QuizApp] SET PARAMETERIZATION SIMPLE 
+ALTER DATABASE [ServiceMaintainance] SET PARAMETERIZATION SIMPLE 
 GO
-ALTER DATABASE [QuizApp] SET READ_COMMITTED_SNAPSHOT OFF 
+ALTER DATABASE [ServiceMaintainance] SET READ_COMMITTED_SNAPSHOT OFF 
 GO
-ALTER DATABASE [QuizApp] SET HONOR_BROKER_PRIORITY OFF 
+ALTER DATABASE [ServiceMaintainance] SET HONOR_BROKER_PRIORITY OFF 
 GO
-ALTER DATABASE [QuizApp] SET RECOVERY SIMPLE 
+ALTER DATABASE [ServiceMaintainance] SET RECOVERY SIMPLE 
 GO
-ALTER DATABASE [QuizApp] SET  MULTI_USER 
+ALTER DATABASE [ServiceMaintainance] SET  MULTI_USER 
 GO
-ALTER DATABASE [QuizApp] SET PAGE_VERIFY CHECKSUM  
+ALTER DATABASE [ServiceMaintainance] SET PAGE_VERIFY CHECKSUM  
 GO
-ALTER DATABASE [QuizApp] SET DB_CHAINING OFF 
+ALTER DATABASE [ServiceMaintainance] SET DB_CHAINING OFF 
 GO
-ALTER DATABASE [QuizApp] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+ALTER DATABASE [ServiceMaintainance] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
 GO
-ALTER DATABASE [QuizApp] SET TARGET_RECOVERY_TIME = 0 SECONDS 
+ALTER DATABASE [ServiceMaintainance] SET TARGET_RECOVERY_TIME = 0 SECONDS 
 GO
-USE [QuizApp]
+USE [ServiceMaintainance]
 GO
-/****** Object:  Table [dbo].[Answers]    Script Date: 26-03-2019 21:56:01 ******/
+/****** Object:  Table [dbo].[ServiceRequest]    Script Date: 27-04-2019 20:32:28 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 SET ANSI_PADDING ON
 GO
-CREATE TABLE [dbo].[Answers](
-	[AnswerID] [int] IDENTITY(1,1) NOT NULL,
-	[AnswerText] [varchar](max) NULL,
-	[QuestionID] [int] NULL,
- CONSTRAINT [PK_Answers] PRIMARY KEY CLUSTERED 
-(
-	[AnswerID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[Choices]    Script Date: 26-03-2019 21:56:01 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-CREATE TABLE [dbo].[Choices](
-	[ChoiceID] [int] IDENTITY(1,1) NOT NULL,
-	[ChoiceText] [varchar](max) NULL,
-	[QuestionID] [int] NULL,
- CONSTRAINT [PK_Choices] PRIMARY KEY CLUSTERED 
-(
-	[ChoiceID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[Course]    Script Date: 26-03-2019 21:56:01 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-CREATE TABLE [dbo].[Course](
-	[ID] [int] IDENTITY(1,1) NOT NULL,
-	[CourseName] [varchar](max) NULL,
-	[CourseDuration] [varchar](max) NULL,
-	[CreatedBy] [bigint] NULL,
-	[CreatedOn] [datetime] NOT NULL,
-	[ModifiedBy] [bigint] NULL,
-	[ModifiedOn] [datetime] NULL,
-	[IsActive] [bit] NOT NULL,
-	[IsDeleted] [bit] NOT NULL,
- CONSTRAINT [PK_Course] PRIMARY KEY CLUSTERED 
-(
-	[ID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[Questions]    Script Date: 26-03-2019 21:56:01 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-CREATE TABLE [dbo].[Questions](
-	[QuestionID] [int] IDENTITY(1,1) NOT NULL,
-	[QuestionText] [varchar](max) NULL,
-	[QuizID] [int] NULL,
- CONSTRAINT [PK_Questions] PRIMARY KEY CLUSTERED 
-(
-	[QuestionID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[Quiz]    Script Date: 26-03-2019 21:56:01 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-CREATE TABLE [dbo].[Quiz](
-	[QuizID] [int] IDENTITY(1,1) NOT NULL,
-	[QuizName] [varchar](80) NULL,
- CONSTRAINT [PK_Quiz] PRIMARY KEY CLUSTERED 
-(
-	[QuizID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[Student]    Script Date: 26-03-2019 21:56:01 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-CREATE TABLE [dbo].[Student](
-	[ID] [int] IDENTITY(1,1) NOT NULL,
-	[StudentName] [varchar](max) NULL,
-	[FathersName] [varchar](max) NULL,
-	[MothersName] [varchar](max) NULL,
-	[RegistrationNo] [varchar](max) NULL,
-	[EnrollmentNo] [varchar](max) NULL,
-	[MobileNo] [varchar](max) NULL,
-	[Address] [varchar](max) NULL,
-	[DateOfAddmision] [datetime] NULL,
-	[CourseId] [int] NOT NULL,
+CREATE TABLE [dbo].[ServiceRequest](
+	[Id] [bigint] IDENTITY(1,1) NOT NULL,
 	[UserId] [bigint] NOT NULL,
+	[FirsName] [nvarchar](50) NOT NULL,
+	[LastName] [nvarchar](50) NULL,
+	[Email] [nvarchar](50) NOT NULL,
+	[PhoneNumber] [varchar](50) NOT NULL,
+	[ProductTybe] [varchar](50) NOT NULL,
+	[Brand] [nvarchar](100) NULL,
+	[DateOfRequest] [datetime] NOT NULL,
+	[Address] [nvarchar](max) NOT NULL,
+	[Pincode] [varchar](50) NOT NULL,
+	[Complaint] [nvarchar](max) NOT NULL,
+	[Comment] [nvarchar](max) NULL,
 	[CreatedBy] [bigint] NULL,
 	[CreatedOn] [datetime] NOT NULL,
 	[ModifiedBy] [bigint] NULL,
 	[ModifiedOn] [datetime] NULL,
 	[IsActive] [bit] NOT NULL,
 	[IsDeleted] [bit] NOT NULL,
-	[DateOfBirth] [datetime] NULL DEFAULT (getdate()),
- CONSTRAINT [PK_Student] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_ServiceRequest] PRIMARY KEY CLUSTERED 
 (
-	[ID] ASC
+	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Subject]    Script Date: 26-03-2019 21:56:01 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_PADDING ON
-GO
-CREATE TABLE [dbo].[Subject](
-	[ID] [int] IDENTITY(1,1) NOT NULL,
-	[SubjectName] [varchar](max) NULL,
-	[SubjectCode] [varchar](max) NULL,
-	[CourseId] [int] NOT NULL,
-	[CreatedBy] [bigint] NULL,
-	[CreatedOn] [datetime] NOT NULL,
-	[ModifiedBy] [bigint] NULL,
-	[ModifiedOn] [datetime] NULL,
-	[IsActive] [bit] NOT NULL,
-	[IsDeleted] [bit] NOT NULL,
- CONSTRAINT [PK_Subject] PRIMARY KEY CLUSTERED 
-(
-	[ID] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-
-GO
-SET ANSI_PADDING OFF
-GO
-/****** Object:  Table [dbo].[User]    Script Date: 26-03-2019 21:56:01 ******/
+/****** Object:  Table [dbo].[User]    Script Date: 27-04-2019 20:32:28 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -270,7 +148,7 @@ CREATE TABLE [dbo].[User](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[UserDetail]    Script Date: 26-03-2019 21:56:01 ******/
+/****** Object:  Table [dbo].[UserDetail]    Script Date: 27-04-2019 20:32:28 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -304,7 +182,7 @@ CREATE TABLE [dbo].[UserDetail](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[UserType]    Script Date: 26-03-2019 21:56:01 ******/
+/****** Object:  Table [dbo].[UserType]    Script Date: 27-04-2019 20:32:28 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -326,256 +204,14 @@ CREATE TABLE [dbo].[UserType](
 GO
 SET ANSI_PADDING OFF
 GO
-SET IDENTITY_INSERT [dbo].[Answers] ON 
+SET IDENTITY_INSERT [dbo].[ServiceRequest] ON 
 
 GO
-INSERT [dbo].[Answers] ([AnswerID], [AnswerText], [QuestionID]) VALUES (1, N'Value types', 1)
+INSERT [dbo].[ServiceRequest] ([Id], [UserId], [FirsName], [LastName], [Email], [PhoneNumber], [ProductTybe], [Brand], [DateOfRequest], [Address], [Pincode], [Complaint], [Comment], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (3, 2, N'Brajesh', N'Kumar', N'brajeshkr18@gmail.com', N'9910753655', N'ddgdgg', N'dfsgd', CAST(N'2019-04-26 23:01:58.023' AS DateTime), N'Mohan Nagar', N'201007', N'dfgdd', N'fdsggds', 101, CAST(N'2019-04-26 23:01:58.757' AS DateTime), NULL, NULL, 0, 0)
 GO
-INSERT [dbo].[Answers] ([AnswerID], [AnswerText], [QuestionID]) VALUES (2, N'All of the above', 2)
+INSERT [dbo].[ServiceRequest] ([Id], [UserId], [FirsName], [LastName], [Email], [PhoneNumber], [ProductTybe], [Brand], [DateOfRequest], [Address], [Pincode], [Complaint], [Comment], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (4, 2, N'Brajesh', N'Kumar', N'brajeshkr18@gmail.com', N'9910753655', N'Air Coolers', N'iluytihlkjghy', CAST(N'2019-04-27 16:34:31.663' AS DateTime), N'Mohan Nagar', N'201007', N'kuiytiul', N'hjgrfukygt', 101, CAST(N'2019-04-27 16:34:31.663' AS DateTime), NULL, NULL, 0, 0)
 GO
-INSERT [dbo].[Answers] ([AnswerID], [AnswerText], [QuestionID]) VALUES (3, N'ToDouble', 3)
-GO
-INSERT [dbo].[Answers] ([AnswerID], [AnswerText], [QuestionID]) VALUES (4, N'is', 4)
-GO
-INSERT [dbo].[Answers] ([AnswerID], [AnswerText], [QuestionID]) VALUES (5, N'Private', 5)
-GO
-INSERT [dbo].[Answers] ([AnswerID], [AnswerText], [QuestionID]) VALUES (6, N'false', 6)
-GO
-INSERT [dbo].[Answers] ([AnswerID], [AnswerText], [QuestionID]) VALUES (7, N'View created with model class', 7)
-GO
-INSERT [dbo].[Answers] ([AnswerID], [AnswerText], [QuestionID]) VALUES (8, N'Reusable view', 8)
-GO
-INSERT [dbo].[Answers] ([AnswerID], [AnswerText], [QuestionID]) VALUES (9, N'Global.asax', 9)
-GO
-INSERT [dbo].[Answers] ([AnswerID], [AnswerText], [QuestionID]) VALUES (10, N'@', 10)
-GO
-INSERT [dbo].[Answers] ([AnswerID], [AnswerText], [QuestionID]) VALUES (11, N'TempData', 11)
-GO
-INSERT [dbo].[Answers] ([AnswerID], [AnswerText], [QuestionID]) VALUES (12, N'XMLResult', 12)
-GO
-SET IDENTITY_INSERT [dbo].[Answers] OFF
-GO
-SET IDENTITY_INSERT [dbo].[Choices] ON 
-
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (1, N'Value types', 1)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (2, N'Reference types', 1)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (3, N'Pointer types', 1)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (4, N'All of the above.', 1)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (5, N'The value types directly contain data.', 2)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (6, N' int, char, and float, which stores numbers, alphabets, and floating point numbers, respectively are value types.', 2)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (7, N'When you declare an int type, the system allocates memory to store the value.', 2)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (8, N'All of the above', 2)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (9, N'ToDecimal', 3)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (10, N'ToDouble', 3)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (11, N'ToInt16', 3)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (12, N'ToInt32', 3)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (13, N'?:', 4)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (14, N'is', 4)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (15, N'as', 4)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (16, N' *', 4)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (17, N'Public', 5)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (18, N'Private', 5)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (19, N'Protected', 5)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (20, N'Internal', 5)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (21, N'true', 6)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (22, N'false', 6)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (23, N'View created with model class', 7)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (24, N'View having same name as class', 7)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (25, N'View created with strong keyword', 7)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (26, N'View created with controller', 7)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (27, N'Its the resource file for a view', 8)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (28, N'View that has strongly-type models', 8)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (29, N'Same as MasterPage in asp.net', 8)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (30, N'Reusable view', 8)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (31, N'Controller', 9)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (32, N'Web.config', 9)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (33, N'Global.asax', 9)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (34, N'None of the Above', 9)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (35, N'!', 10)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (36, N'@', 10)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (37, N'<%:%>', 10)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (38, N')', 10)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (39, N'Session', 11)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (40, N'ViewData', 11)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (41, N'ViewBag', 11)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (42, N'TempData', 11)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (43, N'ViewResult', 12)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (44, N'JsonResult', 12)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (45, N'XMLResult', 12)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (46, N'EmptyResult', 12)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (63, N'New Question Ans 1', 19)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (64, N'New Question Ans 2', 19)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (65, N'New Question Ans 3', 19)
-GO
-INSERT [dbo].[Choices] ([ChoiceID], [ChoiceText], [QuestionID]) VALUES (66, N'New Question Ans 4', 19)
-GO
-SET IDENTITY_INSERT [dbo].[Choices] OFF
-GO
-SET IDENTITY_INSERT [dbo].[Course] ON 
-
-GO
-INSERT [dbo].[Course] ([ID], [CourseName], [CourseDuration], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (1, N'CERTFICATE COURSE IN DESKTOP PUBLISHING (...)', N'6 MONTHS', NULL, CAST(N'2019-03-15 01:54:06.893' AS DateTime), NULL, NULL, 0, 0)
-GO
-INSERT [dbo].[Course] ([ID], [CourseName], [CourseDuration], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (3, N'DIPLOMA IN COMPUTER INFORMATION SYSTEM ( (...)', N'1 YEAR', NULL, CAST(N'2019-03-15 01:54:17.817' AS DateTime), NULL, NULL, 0, 0)
-GO
-INSERT [dbo].[Course] ([ID], [CourseName], [CourseDuration], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (4, N'DIPLOMA IN OFFICE ACCOUNTING & PUBLISHIN (...)', N'1 YEAR', NULL, CAST(N'2019-03-15 01:54:28.383' AS DateTime), NULL, NULL, 0, 0)
-GO
-INSERT [dbo].[Course] ([ID], [CourseName], [CourseDuration], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (5, N'DIPLOMA WEB HOSTING (DWH)', N'1 YEAR', NULL, CAST(N'2019-03-15 01:54:06.893' AS DateTime), NULL, NULL, 0, 0)
-GO
-INSERT [dbo].[Course] ([ID], [CourseName], [CourseDuration], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (6, N'DIPLOMA IN ACCOUNTING', N'1 YEAR', NULL, CAST(N'2019-03-15 01:54:06.893' AS DateTime), NULL, NULL, 0, 0)
-GO
-INSERT [dbo].[Course] ([ID], [CourseName], [CourseDuration], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (7, N'DIPLOMA IN DESKTOP PUBLISHING (DTP)', N'1 YEAR', NULL, CAST(N'2019-03-15 01:54:06.893' AS DateTime), NULL, NULL, 0, 0)
-GO
-INSERT [dbo].[Course] ([ID], [CourseName], [CourseDuration], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (8, N'ADCA-WEB', N'1 YEAR', NULL, CAST(N'2019-03-26 00:34:04.027' AS DateTime), NULL, NULL, 0, 0)
-GO
-INSERT [dbo].[Course] ([ID], [CourseName], [CourseDuration], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (9, N'ADVANCE DIPLOMA IN COMPUTER APPLICATION (...)', N'1 YEAR', NULL, CAST(N'2019-03-15 01:54:06.893' AS DateTime), NULL, NULL, 0, 0)
-GO
-INSERT [dbo].[Course] ([ID], [CourseName], [CourseDuration], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (10, N'ADVANCE DIPLOMA IN COMPUTER PROGRAMMING (...)', N'1 YEAR', NULL, CAST(N'2019-03-15 01:54:06.893' AS DateTime), NULL, NULL, 0, 0)
-GO
-INSERT [dbo].[Course] ([ID], [CourseName], [CourseDuration], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (11, N'ADCTT', N'1 YEAR', NULL, CAST(N'2019-03-15 01:54:06.893' AS DateTime), NULL, NULL, 0, 0)
-GO
-INSERT [dbo].[Course] ([ID], [CourseName], [CourseDuration], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (12, N'ADVANCE DIPLOMA IN HARDWARE & NETWORKING (...)', N'1 YEAR', NULL, CAST(N'2019-03-15 01:54:06.893' AS DateTime), NULL, NULL, 0, 0)
-GO
-INSERT [dbo].[Course] ([ID], [CourseName], [CourseDuration], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (13, N'CERTIFICATE COURSE IN COMPUTER APPLICATI (...)', N'6 MONTHS', NULL, CAST(N'2019-03-15 01:54:06.893' AS DateTime), NULL, NULL, 0, 0)
-GO
-INSERT [dbo].[Course] ([ID], [CourseName], [CourseDuration], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (14, N'ADVANCE DIPLOMA IN TALLY', N'1 YEAR', NULL, CAST(N'2019-03-15 01:54:06.893' AS DateTime), NULL, NULL, 0, 0)
-GO
-INSERT [dbo].[Course] ([ID], [CourseName], [CourseDuration], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (15, N'ADVANCE DIPLOMA IN INFORMATION TECHNOLOG (...)', N'1 YEAR', NULL, CAST(N'2019-03-15 01:54:06.893' AS DateTime), NULL, NULL, 0, 0)
-GO
-INSERT [dbo].[Course] ([ID], [CourseName], [CourseDuration], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (16, N'ADVANCE DIPLOMA IN NETWORKING (ADN)', N'1 YEAR', NULL, CAST(N'2019-03-15 01:54:06.893' AS DateTime), NULL, NULL, 0, 0)
-GO
-INSERT [dbo].[Course] ([ID], [CourseName], [CourseDuration], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (17, N'CERTIFICATE COURSE IN AUTO CAD (CCA)', N'6 MONTHS', NULL, CAST(N'2019-03-15 01:54:06.893' AS DateTime), NULL, NULL, 0, 0)
-GO
-INSERT [dbo].[Course] ([ID], [CourseName], [CourseDuration], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (18, N'CERTIFICATE COURSE IN C-LANGUAGE ©', N'6 MONTHS', NULL, CAST(N'2019-03-15 01:54:06.893' AS DateTime), NULL, NULL, 0, 0)
-GO
-INSERT [dbo].[Course] ([ID], [CourseName], [CourseDuration], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (19, N'CERTIFICATE COURSE IN TALLY (TALLY)', N'6 MONTHS', NULL, CAST(N'2019-03-15 01:54:06.893' AS DateTime), NULL, NULL, 0, 0)
-GO
-INSERT [dbo].[Course] ([ID], [CourseName], [CourseDuration], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (20, N'CERTIFICATE IN ACCOUNTING BUSINESS SYSTE (...)', N'6 MONTHS', NULL, CAST(N'2019-03-15 01:54:06.893' AS DateTime), NULL, NULL, 0, 0)
-GO
-INSERT [dbo].[Course] ([ID], [CourseName], [CourseDuration], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (21, N'DIPLOMA COMPUTER HARDWARE (DCH)', N'1 YEAR', NULL, CAST(N'2019-03-15 01:54:06.893' AS DateTime), NULL, NULL, 0, 0)
-GO
-INSERT [dbo].[Course] ([ID], [CourseName], [CourseDuration], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (22, N'DCAW', N'1 YEAR', NULL, CAST(N'2019-03-15 01:54:06.893' AS DateTime), NULL, NULL, 0, 0)
-GO
-INSERT [dbo].[Course] ([ID], [CourseName], [CourseDuration], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (23, N'DIPLOMA IN COMPUTER APPLICATION (DCA)', N'1 YEAR', NULL, CAST(N'2019-03-15 01:54:06.893' AS DateTime), NULL, NULL, 0, 0)
-GO
-SET IDENTITY_INSERT [dbo].[Course] OFF
-GO
-SET IDENTITY_INSERT [dbo].[Questions] ON 
-
-GO
-INSERT [dbo].[Questions] ([QuestionID], [QuestionText], [QuizID]) VALUES (1, N'Which of the following variable types can be assigned a value directly in C#?', 8)
-GO
-INSERT [dbo].[Questions] ([QuestionID], [QuestionText], [QuizID]) VALUES (2, N'Which of the following is correct about value type variables in C#?', 8)
-GO
-INSERT [dbo].[Questions] ([QuestionID], [QuestionText], [QuizID]) VALUES (3, N'Which of the following converts a type to a double type in C#?', 8)
-GO
-INSERT [dbo].[Questions] ([QuestionID], [QuestionText], [QuizID]) VALUES (4, N'Which of the following operator determines whether an object is of a certain type in C#?', 8)
-GO
-INSERT [dbo].[Questions] ([QuestionID], [QuestionText], [QuizID]) VALUES (5, N'Which of the following access specifier in C# allows a class to hide its member variables and member functions from other functions and objects?', 8)
-GO
-INSERT [dbo].[Questions] ([QuestionID], [QuestionText], [QuizID]) VALUES (6, N'C# supports multiple inheritance.', 8)
-GO
-INSERT [dbo].[Questions] ([QuestionID], [QuestionText], [QuizID]) VALUES (7, N'What is strongly typed view in MVC', 7)
-GO
-INSERT [dbo].[Questions] ([QuestionID], [QuestionText], [QuizID]) VALUES (8, N'What are partial views in MVC', 7)
-GO
-INSERT [dbo].[Questions] ([QuestionID], [QuestionText], [QuizID]) VALUES (9, N'Where are routes registred in ASP.NET MVC Application', 7)
-GO
-INSERT [dbo].[Questions] ([QuestionID], [QuestionText], [QuizID]) VALUES (10, N'Which of the following represents RAZOR syntax ?', 7)
-GO
-INSERT [dbo].[Questions] ([QuestionID], [QuestionText], [QuizID]) VALUES (11, N'------------- dictionary is used to share data between controller actions', 7)
-GO
-INSERT [dbo].[Questions] ([QuestionID], [QuestionText], [QuizID]) VALUES (12, N'Which is not a type of result in MVC', 7)
-GO
-INSERT [dbo].[Questions] ([QuestionID], [QuestionText], [QuizID]) VALUES (19, N'Test Quiz1', NULL)
-GO
-SET IDENTITY_INSERT [dbo].[Questions] OFF
-GO
-SET IDENTITY_INSERT [dbo].[Quiz] ON 
-
-GO
-INSERT [dbo].[Quiz] ([QuizID], [QuizName]) VALUES (1, N'Programming C#')
-GO
-INSERT [dbo].[Quiz] ([QuizID], [QuizName]) VALUES (2, N'Developing ASP.NET MVC')
-GO
-SET IDENTITY_INSERT [dbo].[Quiz] OFF
-GO
-SET IDENTITY_INSERT [dbo].[Student] ON 
-
-GO
-INSERT [dbo].[Student] ([ID], [StudentName], [FathersName], [MothersName], [RegistrationNo], [EnrollmentNo], [MobileNo], [Address], [DateOfAddmision], [CourseId], [UserId], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted], [DateOfBirth]) VALUES (1, N'VIJAY KUMAR SHARMA', N'RAMJI LAL SHARMA', N'MUTHRI DEVI', N'ST100003', N'0', N'9667836947', N'GUPTESHWAR ROAD DAUSA', NULL, 23, 15, NULL, CAST(N'2019-03-24 21:58:13.117' AS DateTime), NULL, NULL, 1, 0, CAST(N'1980-07-10 00:00:00.000' AS DateTime))
-GO
-SET IDENTITY_INSERT [dbo].[Student] OFF
-GO
-SET IDENTITY_INSERT [dbo].[Subject] ON 
-
-GO
-INSERT [dbo].[Subject] ([ID], [SubjectName], [SubjectCode], [CourseId], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (1, N'dfe', N'gddfgfdg', 1, NULL, CAST(N'2019-03-21 04:29:06.700' AS DateTime), NULL, NULL, 0, 1)
-GO
-INSERT [dbo].[Subject] ([ID], [SubjectName], [SubjectCode], [CourseId], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (2, N'dfe', N'fff', 3, NULL, CAST(N'2019-03-15 01:52:45.040' AS DateTime), NULL, NULL, 0, 1)
-GO
-INSERT [dbo].[Subject] ([ID], [SubjectName], [SubjectCode], [CourseId], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (3, N'fdfdf', N'fdfdf', 1, NULL, CAST(N'2019-03-15 01:52:57.817' AS DateTime), NULL, NULL, 0, 1)
-GO
-INSERT [dbo].[Subject] ([ID], [SubjectName], [SubjectCode], [CourseId], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (4, N'dfe', N'gddfgfdg', 1, NULL, CAST(N'2019-03-15 01:53:25.177' AS DateTime), NULL, NULL, 0, 1)
-GO
-INSERT [dbo].[Subject] ([ID], [SubjectName], [SubjectCode], [CourseId], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (5, N'kyyy', N'dsdsds', 3, NULL, CAST(N'2019-03-21 04:36:18.680' AS DateTime), NULL, NULL, 1, 0)
-GO
-INSERT [dbo].[Subject] ([ID], [SubjectName], [SubjectCode], [CourseId], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (6, N'dfe', N'New ', 1, NULL, CAST(N'2019-03-26 00:43:04.713' AS DateTime), NULL, NULL, 1, 0)
-GO
-INSERT [dbo].[Subject] ([ID], [SubjectName], [SubjectCode], [CourseId], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (7, N'C#', N'C#1', 23, NULL, CAST(N'2019-03-26 01:35:32.640' AS DateTime), NULL, NULL, 1, 0)
-GO
-INSERT [dbo].[Subject] ([ID], [SubjectName], [SubjectCode], [CourseId], [CreatedBy], [CreatedOn], [ModifiedBy], [ModifiedOn], [IsActive], [IsDeleted]) VALUES (8, N'C# 1', N'C# 1', 23, NULL, CAST(N'2019-03-26 01:35:44.920' AS DateTime), NULL, NULL, 1, 0)
-GO
-SET IDENTITY_INSERT [dbo].[Subject] OFF
+SET IDENTITY_INSERT [dbo].[ServiceRequest] OFF
 GO
 SET IDENTITY_INSERT [dbo].[User] ON 
 
@@ -605,30 +241,10 @@ INSERT [dbo].[UserType] ([Id], [Name], [Code], [CreatedOn], [IsActive]) VALUES (
 GO
 SET IDENTITY_INSERT [dbo].[UserType] OFF
 GO
-ALTER TABLE [dbo].[Answers]  WITH CHECK ADD  CONSTRAINT [FK_Answers_Questions] FOREIGN KEY([QuestionID])
-REFERENCES [dbo].[Questions] ([QuestionID])
-GO
-ALTER TABLE [dbo].[Answers] CHECK CONSTRAINT [FK_Answers_Questions]
-GO
-ALTER TABLE [dbo].[Choices]  WITH CHECK ADD  CONSTRAINT [FK_Choices_Questions] FOREIGN KEY([QuestionID])
-REFERENCES [dbo].[Questions] ([QuestionID])
-GO
-ALTER TABLE [dbo].[Choices] CHECK CONSTRAINT [FK_Choices_Questions]
-GO
-ALTER TABLE [dbo].[Questions]  WITH CHECK ADD  CONSTRAINT [FK_Questions_Quiz] FOREIGN KEY([QuizID])
-REFERENCES [dbo].[Subject] ([ID])
-GO
-ALTER TABLE [dbo].[Questions] CHECK CONSTRAINT [FK_Questions_Quiz]
-GO
-ALTER TABLE [dbo].[Student]  WITH CHECK ADD  CONSTRAINT [FK_User_UserId] FOREIGN KEY([UserId])
+ALTER TABLE [dbo].[ServiceRequest]  WITH CHECK ADD  CONSTRAINT [FK__ServiceRequest__User__Id] FOREIGN KEY([UserId])
 REFERENCES [dbo].[User] ([Id])
 GO
-ALTER TABLE [dbo].[Student] CHECK CONSTRAINT [FK_User_UserId]
-GO
-ALTER TABLE [dbo].[Subject]  WITH CHECK ADD  CONSTRAINT [FK_Course_CourseId] FOREIGN KEY([CourseId])
-REFERENCES [dbo].[Course] ([ID])
-GO
-ALTER TABLE [dbo].[Subject] CHECK CONSTRAINT [FK_Course_CourseId]
+ALTER TABLE [dbo].[ServiceRequest] CHECK CONSTRAINT [FK__ServiceRequest__User__Id]
 GO
 ALTER TABLE [dbo].[User]  WITH CHECK ADD  CONSTRAINT [FK__UserTypeId__UserType__Id] FOREIGN KEY([UserTypeId])
 REFERENCES [dbo].[UserType] ([Id])
@@ -640,7 +256,7 @@ REFERENCES [dbo].[User] ([Id])
 GO
 ALTER TABLE [dbo].[UserDetail] CHECK CONSTRAINT [FK__UserDetail__User__Id]
 GO
-/****** Object:  StoredProcedure [dbo].[spGetUsers]    Script Date: 26-03-2019 21:56:01 ******/
+/****** Object:  StoredProcedure [dbo].[spGetUsers]    Script Date: 27-04-2019 20:32:28 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -733,8 +349,9 @@ Select * from #UserTemp As userData Where 1=1
 
 
 
+
 GO
 USE [master]
 GO
-ALTER DATABASE [QuizApp] SET  READ_WRITE 
+ALTER DATABASE [ServiceMaintainance] SET  READ_WRITE 
 GO
