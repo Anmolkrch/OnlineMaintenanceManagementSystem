@@ -1,0 +1,180 @@
+﻿
+@{
+    ViewBag.Title = "UploadExcel";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Library</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Student Upload </h5>
+                        <input type="hidden" id="ErrorMsg" value="@ViewBag.Error"/>
+                    </div>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Download Format:
+                                </th>
+                                <th>
+                                    Excel:
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @using (Html.BeginForm("UploadExcel", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return myFunction()", id = "UploadExcel" }))
+                            {
+                                @*<form method="POST" enctype="multipart/form-data" id="fileUploadForm">*@
+
+                                    <tr>
+                                        <td>
+                                            <div class="form-group">
+                                                <div class="">
+                                                    <a href="~/html/assets/SeasFoundation.xlsx"><img src="~/Content/Microsoft-Excel_icon.png" width="25" height="25" title="Download Excel format" alt="excel" /></a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <div class="">
+                                                    <input type="file" id="FileUpload" name="FileUpload" class="" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-group">
+                                                <div class="">
+                                                    <input type="submit" value="Upload" id="btnSubmit" class="btn btn-primary" />
+
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    @*</form>*@
+                                    }
+                            </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="../../html/assets/libs/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        if ($("#ErrorMsg").val() != null && $("#ErrorMsg").val() != "") {
+            alert($("#ErrorMsg").val());
+        }
+
+        $("#btnSubmit").submit(function (e) {
+            //event.preventDefault();
+
+            // Get form
+            var form = $('#fileUploadForm')[0];
+
+            // Create an FormData object 
+            var data = new FormData(form);
+
+            // disabled the submit button
+            //$("#btnSubmit").prop("disabled", true);
+            //e.preventDefault();
+            //$.ajax({
+            //    type: "POST",
+            //    enctype: 'multipart/form-data',
+            //    url: "/Admin/UploadExcel",
+            //    data: data,
+            //    processData: false,
+            //    contentType: "application/x-www-form-urlencoded",
+            //    cache: false,
+            //    dataType: 'json',
+            //    timeout: 600000,
+            //    success: function (data) {
+            //        debugger;
+            //        $("#result").text(data);
+            //        console.log("SUCCESS : ", data);
+            //        $("#btnSubmit").prop("disabled", false);
+
+            //    },
+            //    error: function (e) {
+            //        debugger;
+            //        $("#result").text(e.responseText);
+            //        console.log("ERROR : ", e);
+            //        $("#btnSubmit").prop("disabled", false);
+
+            //    }
+            //});
+
+
+            //$.ajax({
+            //    url: "/Admin/UploadExcel",
+            //    data: data,
+            //    dataType: "json",
+            //    contentType: "application/json; charset=utf-8",
+            //    dataFilter: function (data) { return data; },
+            //    success: function (data) {
+            //        debugger
+            //        var results = $.map(data, function (item) {
+            //            return { value: item.value, id: item.id }
+            //        });
+            //        cache[request.term] = results; response(results);
+            //    }
+            //});
+            debugger;
+        });
+       //$.ajax({
+       //     type: "POST",
+       //     enctype: 'multipart/form-data',
+       //     url: "/api/upload/multi",
+       //     data: data,
+       //     processData: false,
+       //     contentType: false,
+       //     cache: false,
+       //     timeout: 600000,
+       //     success: function (data) {
+
+       //         $("#result").text(data);
+       //         console.log("SUCCESS : ", data);
+       //         $("#btnSubmit").prop("disabled", false);
+
+       //     },
+       //     error: function (e) {
+
+       //         $("#result").text(e.responseText);
+       //         console.log("ERROR : ", e);
+       //         $("#btnSubmit").prop("disabled", false);
+
+       //     }
+       // });
+    })
+    function myFunction() {
+        //alert("File uploaded successfully");
+    }
+</script>  
