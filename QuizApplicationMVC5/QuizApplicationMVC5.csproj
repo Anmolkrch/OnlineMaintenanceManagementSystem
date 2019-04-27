@@ -1323,27 +1323,24 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Shared\_UserInfo.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\_RemoveAccountPartial.cshtml" />
     <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
-    <Content Include="Views\Shared\_StudentLayout.cshtml" />
     <Content Include="Views\Admin\MyProfile.cshtml" />
     <Content Include="Views\Account\Unauthorized.cshtml" />
-    <Content Include="Views\Admin\UploadExcel.cshtml" />
     <Content Include="Views\Shared\_HomeLayout.cshtml" />
     <Content Include="Views\ServiceRequest\Index.cshtml" />
     <Content Include="Views\Home\ServiceRequest.cshtml" />
     <Content Include="Views\Shared\Email Templates\_Notify.cshtml" />
+    <Content Include="Views\ServiceRequest\Create.cshtml" />
+    <Content Include="Views\ServiceRequest\Delete.cshtml" />
+    <Content Include="Views\ServiceRequest\Details.cshtml" />
+    <Content Include="Views\ServiceRequest\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
