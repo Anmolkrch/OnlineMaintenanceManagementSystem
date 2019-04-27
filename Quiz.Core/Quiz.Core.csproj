@@ -76,6 +76,9 @@
     <Compile Include="EntityModel\ServiceRequest.cs">
       <DependentUpon>DataEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModel\ServiceRequestStatu.cs">
+      <DependentUpon>DataEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModel\User.cs">
       <DependentUpon>DataEntityModel.tt</DependentUpon>
     </Compile>

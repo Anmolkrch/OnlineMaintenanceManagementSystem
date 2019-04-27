@@ -28,13 +28,13 @@ namespace Quiz.Service.ServiceRequest
         }
         public dynamic serviceRequest(int? id)
         {
-            Quiz.Core.EntityModel.ServiceRequest serviceRequest = new Quiz.Core.EntityModel.ServiceRequest();
+            ServiceRequestViewModel serviceRequest = new ServiceRequestViewModel();
             try
             {
                 if (id != 0 && id != null)
                 {
-                    serviceRequest = _Context.ServiceRequests.Find(id);
-                  //  Mapper.Map(EntserviceRequest, serviceRequest);
+                   var EntserviceRequest = _Context.ServiceRequests.Find(id);
+                    Mapper.Map(EntserviceRequest, serviceRequest);
                 }
             }
             catch (Exception EX)
@@ -93,6 +93,38 @@ namespace Quiz.Service.ServiceRequest
                 return false;
             }
             
+        }
+        public bool SaveServiceRequestsStatus(ServiceRequestViewModel serviceRequest)
+        {
+            Quiz.Core.EntityModel.ServiceRequestStatu tblServiceRequestStatus = new Quiz.Core.EntityModel.ServiceRequestStatu();
+            bool result = false;
+            try
+            {
+                //if (serviceRequest.Id == 0)
+                //{
+
+                    tblServiceRequestStatus.CreatedOn = DateTime.Now;
+                    tblServiceRequestStatus.Status = (int)serviceRequest.UserId;
+                    tblServiceRequestStatus.CreatedBy = 101;
+                    tblServiceRequestStatus.ServiceRequestId = serviceRequest.Id;
+                    tblServiceRequestStatus.Comment = serviceRequest.Comment;
+                _Context.ServiceRequestStatus.Add(tblServiceRequestStatus);
+                    _Context.SaveChanges();
+                    result = true;
+                //}
+                //else
+                //{
+                //    Mapper.Map(serviceRequest, tblServiceRequest);
+                //    _Context.Entry(tblServiceRequest).State = EntityState.Modified;
+                //    _Context.SaveChanges();
+                //    result = true;
+                //}
+            }
+            catch (Exception EX)
+            {
+                result = false;
+            }
+            return result;
         }
         #endregion
     }

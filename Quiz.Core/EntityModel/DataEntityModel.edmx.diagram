@@ -12,6 +12,8 @@
         <AssociationConnector Association="EmployeeMGMTModel.FK__UserTypeId__UserType__Id" />
         <EntityTypeShape EntityType="EmployeeMGMTModel.ServiceRequest" Width="1.5" PointX="5.25" PointY="7.625" />
         <AssociationConnector Association="EmployeeMGMTModel.FK__ServiceRequest__User__Id" />
+        <EntityTypeShape EntityType="EmployeeMGMTModel.ServiceRequestStatu" Width="1.5" PointX="7.5" PointY="8.625" />
+        <AssociationConnector Association="EmployeeMGMTModel.FK__ServiceRequestStatus__Id" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

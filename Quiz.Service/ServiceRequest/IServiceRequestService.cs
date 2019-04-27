@@ -14,6 +14,6 @@ namespace Quiz.Service.ServiceRequest
         dynamic serviceRequest(int? id);
         bool SaveServiceRequests(ServiceRequestViewModel atten);
         bool DeleteserviceRequest(int id);
-
+        bool SaveServiceRequestsStatus(ServiceRequestViewModel atten);
     }
 }

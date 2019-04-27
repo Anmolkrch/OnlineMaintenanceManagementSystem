@@ -14,6 +14,12 @@ namespace Quiz.Core.EntityModel
     
     public partial class ServiceRequest
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ServiceRequest()
+        {
+            this.ServiceRequestStatus = new HashSet<ServiceRequestStatu>();
+        }
+    
         public long Id { get; set; }
         public long UserId { get; set; }
         public string FirsName { get; set; }
@@ -35,5 +41,7 @@ namespace Quiz.Core.EntityModel
         public bool IsDeleted { get; set; }
     
         public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ServiceRequestStatu> ServiceRequestStatus { get; set; }
     }
 }

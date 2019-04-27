@@ -7,6 +7,7 @@
     <meta charset="utf-8">
     <meta name="keywords" content="Maintenance Service a Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../Assets/images/IMG/favicon.png">
     <link href="../../Assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
     <link href="../../Assets/css/fontawesome-all.min.css" rel="stylesheet" type="text/css" media="all">
     <link href="../../Assets/css/easy-responsive-tabs.css" rel='stylesheet' type='text/css' />
@@ -21,7 +22,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <header>
         <!-- header -->
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="@Url.Action("Index", "Home")">Maintenance Service</a>
+            <a class="navbar-brand" href="@Url.Action("Index", "Home")"><img src="../Assets/images/IMG/logo.png" alt="Anmol" class="light-logo" /></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -39,22 +40,38 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown
+                            Services
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Gallery</a>
-                            <a class="dropdown-item" href="#">Typography</a>
-
                             
+                            <a href="@Url.Action("ServiceRequest", "Home", new { Product ="TV" })" class="dropdown-item">LED TV</a>
+
+                            <a href="@Url.Action("ServiceRequest", "Home", new { Product ="Washing Machine" })" class="dropdown-item">Washing Machine</a>
+
+                            <a href="@Url.Action("ServiceRequest", "Home", new { Product ="Refrigerator" })" class="dropdown-item">Refrigerator</a>
+
+                            <a href="@Url.Action("ServiceRequest", "Home", new { Product ="Air Conditioners" })" class="dropdown-item">Air Conditioners</a>
+
+                            <a href="@Url.Action("ServiceRequest", "Home", new { Product ="Laptop" })" class="dropdown-item">Laptop</a>
+
+                            <a href="@Url.Action("ServiceRequest", "Home", new { Product ="Air Coolers" })" class="dropdown-item">Air Coolers</a>
+
+                            <a href="@Url.Action("ServiceRequest", "Home", new { Product ="Camera" })" class="dropdown-item">Camera</a>
+
+                            <a href="@Url.Action("ServiceRequest", "Home", new { Product ="Microwave Ovens" })" class="dropdown-item">Microwave Ovens</a>
+                            
+
+                            <a class="dropdown-item" href="error.html">Error</a>
                         </div>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link " href="#">Contact</a>
                     </li>
 
-                    <li class="w3">
-                        <a href="#" class="nav-link" data-toggle="modal" data-target="#myModal">Login</a>
-                    </li>
+                    @*<li class="w3">
+            <a href="#" class="nav-link" data-toggle="modal" data-target="#myModal">Login</a>
+        </li>*@
 
                 </ul>
 </div>
@@ -80,14 +97,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </ul>
                 </div>
                 <div class="copyright">
-                    <p>© 2018 Maintenance Service. All Rights Reserved | Design by <a href="https://w3layouts.com/">W3layouts</a></p>
+                    <p>© 2019 Maintenance Service. All Rights Reserved | Design by <a href="https://w3layouts.com/">Anmol</a></p>
 
                 </div>
             </div>
         </section>
         <!-- /Footer-->
         <!-- bootstrap-pop-up for login and register -->
-        <div class="modal video-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">
+        @*<div class="modal video-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -132,7 +149,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </section>
                 </div>
             </div>
-        </div>
+        </div>*@
         <!-- //bootstrap-pop-up for login and register-->
 
         <script src="../../Assets/js/jquery.min.v3.js"></script>

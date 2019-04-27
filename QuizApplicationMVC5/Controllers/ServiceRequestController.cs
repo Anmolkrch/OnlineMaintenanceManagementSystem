@@ -40,7 +40,7 @@ namespace MVCFinalProject.Controllers
         // GET: /serviceRequest/Edit/5
         public ActionResult Edit(int? id)
         {
-            dynamic serviceRequest = new Quiz.ViewModel.ServiceRequestViewModel();
+            dynamic serviceRequest = new ServiceRequestViewModel();
             if (id != null && id != 0)
             {
                 serviceRequest = _IServiceRequest.serviceRequest(id);
@@ -55,7 +55,7 @@ namespace MVCFinalProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                _IServiceRequest.SaveServiceRequests(serviceRequest);
+                _IServiceRequest.SaveServiceRequestsStatus(serviceRequest);
                 return RedirectToAction("Index");
             }
             return View(serviceRequest);

@@ -272,6 +272,9 @@
     <Content Include="Assets\images\IMG\banner.jpg" />
     <Content Include="Assets\images\IMG\ca.jpg" />
     <Content Include="Assets\images\IMG\co.png" />
+    <Content Include="Assets\images\IMG\favicon.png" />
+    <Content Include="Assets\images\IMG\Logo.png" />
+    <Content Include="Assets\images\IMG\Logo1.png" />
     <Content Include="Assets\images\IMG\lp.png" />
     <Content Include="Assets\images\IMG\mv.jpg" />
     <Content Include="Assets\images\IMG\rf.jpg" />

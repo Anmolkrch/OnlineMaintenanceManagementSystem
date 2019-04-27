@@ -1,6 +1,6 @@
-﻿@model Quiz.Core.EntityModel.ServiceRequest
+﻿@model Quiz.ViewModel.ServiceRequestViewModel
 @{
-              
+
 
                 ViewBag.Title = "Edit";
                 Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -31,7 +31,60 @@
                                 @Html.ValidationMessageFor(model => model.FirsName, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FirsName, new { @class = "control-label col-md-4" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(model => model.FirsName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.FirsName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FirsName, new { @class = "control-label col-md-4" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(model => model.FirsName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.FirsName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FirsName, new { @class = "control-label col-md-4" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(model => model.FirsName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.FirsName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FirsName, new { @class = "control-label col-md-4" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(model => model.FirsName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.FirsName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FirsName, new { @class = "control-label col-md-4" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(model => model.FirsName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.FirsName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.FirsName, new { @class = "control-label col-md-4" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(model => model.FirsName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.FirsName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Approval Status", new { @class = "control-label col-md-4" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("UserId", new List<SelectListItem>
+                                    {
+                                    new SelectListItem{ Text="Option 1", Value = "1" },
+                                    new SelectListItem{ Text="Option 2", Value = "2" },
+                                    new SelectListItem{ Text="Option 3", Value = "3" },
+                                    },new { @class = "form-control" })
+                                    @*@Html.ValidationMessageFor(model => model.FirsName, "", new { @class = "text-danger" })*@
+                            </div>
+                        </div>
                     </div>
                     <div class="border-top">
                         <div class="card-body">

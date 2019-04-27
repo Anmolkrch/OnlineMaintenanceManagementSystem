@@ -35,7 +35,7 @@ namespace QuizApplicationMVC5.Controllers
         public ActionResult ServiceRequest(string Product)
         {
             ServiceRequestViewModel ObjServiceRequestViewModel = new ServiceRequestViewModel();
-            ViewBag.Message = "Your ServiceRequest page.";
+            ViewBag.Visibility = "none";
             ObjServiceRequestViewModel.ProductTybe = Product;
             return View(ObjServiceRequestViewModel);
         }
@@ -56,14 +56,20 @@ namespace QuizApplicationMVC5.Controllers
                     user.FirstName = model.FirsName;
                     mailBody = RenderPartialToString("_Notify", user, ControllerContext);
                     _IMasterService.SendAccountCreatationEmail("Service Request Generated", mailBody, user, 101);
+                    
                 }
                
                 catch (Exception ex)
                 {
                     ModelState.AddModelError("", "Invalid login attempt");
+                    return View(model);
                 }
 
             }
+            ModelState.Clear();
+            ViewBag.Message = "Thanks " +  model.FirsName + "" + "  your request is created for "+model.ProductTybe;
+            ViewBag.Visibility = "inline";
+            model = new ServiceRequestViewModel();
             return View(model);
         }
         public static string RenderPartialToString(string viewName, object model, ControllerContext ControllerContext)

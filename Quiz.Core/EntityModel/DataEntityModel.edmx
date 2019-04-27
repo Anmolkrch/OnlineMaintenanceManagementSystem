@@ -29,6 +29,21 @@
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="ServiceRequestStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServiceRequestId" Type="bigint" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="bigint" />
+          <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="Id" />
@@ -100,6 +115,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ServiceRequestStatus__Id">
+          <End Role="ServiceRequest" Type="Self.ServiceRequest" Multiplicity="1" />
+          <End Role="ServiceRequestStatus" Type="Self.ServiceRequestStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceRequest">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceRequestStatus">
+              <PropertyRef Name="ServiceRequestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__UserDetail__User__Id">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="UserDetail" Type="Self.UserDetail" Multiplicity="0..1" />
@@ -127,12 +154,17 @@
         <Function Name="spGetUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="EmployeeMGMTModelStoreContainer">
           <EntitySet Name="ServiceRequest" EntityType="Self.ServiceRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceRequestStatus" EntityType="Self.ServiceRequestStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserDetail" EntityType="Self.UserDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserType" EntityType="Self.UserType" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__ServiceRequest__User__Id" Association="Self.FK__ServiceRequest__User__Id">
             <End Role="User" EntitySet="User" />
             <End Role="ServiceRequest" EntitySet="ServiceRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceRequestStatus__Id" Association="Self.FK__ServiceRequestStatus__Id">
+            <End Role="ServiceRequest" EntitySet="ServiceRequest" />
+            <End Role="ServiceRequestStatus" EntitySet="ServiceRequestStatus" />
           </AssociationSet>
           <AssociationSet Name="FK__UserDetail__User__Id" Association="Self.FK__UserDetail__User__Id">
             <End Role="User" EntitySet="User" />
@@ -164,6 +196,11 @@
           <AssociationSet Name="FK__ServiceRequest__User__Id" Association="EmployeeMGMTModel.FK__ServiceRequest__User__Id">
             <End Role="User" EntitySet="Users" />
             <End Role="ServiceRequest" EntitySet="ServiceRequests" />
+          </AssociationSet>
+          <EntitySet Name="ServiceRequestStatus" EntityType="EmployeeMGMTModel.ServiceRequestStatu" />
+          <AssociationSet Name="FK__ServiceRequestStatus__Id" Association="EmployeeMGMTModel.FK__ServiceRequestStatus__Id">
+            <End Role="ServiceRequest" EntitySet="ServiceRequests" />
+            <End Role="ServiceRequestStatu" EntitySet="ServiceRequestStatus" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="User">
@@ -278,6 +315,7 @@
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="User" Relationship="EmployeeMGMTModel.FK__ServiceRequest__User__Id" FromRole="ServiceRequest" ToRole="User" />
+          <NavigationProperty Name="ServiceRequestStatus" Relationship="EmployeeMGMTModel.FK__ServiceRequestStatus__Id" FromRole="ServiceRequest" ToRole="ServiceRequestStatu" />
         </EntityType>
         <Association Name="FK__ServiceRequest__User__Id">
           <End Type="EmployeeMGMTModel.User" Role="User" Multiplicity="1" />
@@ -288,6 +326,34 @@
             </Principal>
             <Dependent Role="ServiceRequest">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ServiceRequestStatu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServiceRequestId" Type="Int64" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="Int64" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ServiceRequest" Relationship="EmployeeMGMTModel.FK__ServiceRequestStatus__Id" FromRole="ServiceRequestStatu" ToRole="ServiceRequest" />
+        </EntityType>
+        <Association Name="FK__ServiceRequestStatus__Id">
+          <End Type="EmployeeMGMTModel.ServiceRequest" Role="ServiceRequest" Multiplicity="1" />
+          <End Type="EmployeeMGMTModel.ServiceRequestStatu" Role="ServiceRequestStatu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceRequest">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServiceRequestStatu">
+              <PropertyRef Name="ServiceRequestId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -381,6 +447,22 @@
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirsName" ColumnName="FirsName" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceRequestStatus">
+            <EntityTypeMapping TypeName="EmployeeMGMTModel.ServiceRequestStatu">
+              <MappingFragment StoreEntitySet="ServiceRequestStatus">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ServiceRequestId" ColumnName="ServiceRequestId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -31,6 +31,7 @@ namespace Quiz.Core.EntityModel
         public virtual DbSet<UserDetail> UserDetails { get; set; }
         public virtual DbSet<UserType> UserTypes { get; set; }
         public virtual DbSet<ServiceRequest> ServiceRequests { get; set; }
+        public virtual DbSet<ServiceRequestStatu> ServiceRequestStatus { get; set; }
     
         public virtual int spGetUsers()
         {
