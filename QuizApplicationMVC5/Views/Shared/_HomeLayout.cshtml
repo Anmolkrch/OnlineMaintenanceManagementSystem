@@ -35,15 +35,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <li class="nav-item">
                         <a class="nav-link" href="#">About</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("ServiceRequest", "Home")">Services</a>
-                    </li>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Services
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            
+
                             <a href="@Url.Action("ServiceRequest", "Home", new { Product ="TV" })" class="dropdown-item">LED TV</a>
 
                             <a href="@Url.Action("ServiceRequest", "Home", new { Product ="Washing Machine" })" class="dropdown-item">Washing Machine</a>
@@ -59,7 +57,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <a href="@Url.Action("ServiceRequest", "Home", new { Product ="Camera" })" class="dropdown-item">Camera</a>
 
                             <a href="@Url.Action("ServiceRequest", "Home", new { Product ="Microwave Ovens" })" class="dropdown-item">Microwave Ovens</a>
-                            
+
 
                             <a class="dropdown-item" href="error.html">Error</a>
                         </div>
@@ -68,10 +66,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <li class="nav-item">
                         <a class="nav-link " href="#">Contact</a>
                     </li>
+                    @if (Session["UserConnected"] == null)
+                    {
 
-                    @*<li class="w3">
-            <a href="#" class="nav-link" data-toggle="modal" data-target="#myModal">Login</a>
-        </li>*@
+                        <li class="w3">
+                            <a href="#" class="nav-link" data-toggle="modal" data-target="#myModal">Login</a>
+                        </li>
+
+                    }
+                    else
+                    {
+                        <li class="MyProfile">
+                            <img src="~/Assets/images/p.png" style="padding-left: 37px"/>
+                            <a href="#" class="nav-link">My Profile</a>
+
+                        </li>
+                    }
+
 
                 </ul>
 </div>
@@ -104,7 +115,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </section>
         <!-- /Footer-->
         <!-- bootstrap-pop-up for login and register -->
-        @*<div class="modal video-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">
+        <div class="modal video-modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -123,15 +134,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     </div>
                                     <div class="form">
                                         <h3>Login to your account</h3>
-                                        <form action="#" method="post">
+                                        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal m-t-20", id = "loginform", role = "form" }))
+                                        {
+                                            @Html.AntiForgeryToken()
                                             <input type="text" name="Username" placeholder="Username" required="">
                                             <input type="password" name="Password" placeholder="Password" required="">
-                                            <input type="submit" value="Login">
-                                        </form>
-                                        <div class="cta">
-                                            <a href="#">Forgot password?</a>
+                                            <input type="submit" value="Login" id="btnlogin">
+                                            
+                                            <div class="cta">
+                                                <a href="#">Forgot password?</a>
+                                            </div>
+                                        }
                                         </div>
-                                    </div>
                                     <div class="form">
                                         <h3>Create a new account</h3>
                                         <form action="#" method="post">
@@ -149,7 +163,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </section>
                 </div>
             </div>
-        </div>*@
+        </div>
         <!-- //bootstrap-pop-up for login and register-->
 
         <script src="../../Assets/js/jquery.min.v3.js"></script>
@@ -331,7 +345,18 @@ setInterval(changeWord, 4000);
 			interval: 100,
 			decimals: 0,
 		});
+        $('#UseShipAddr').click(function () {
 
+            $.ajax({
+                url: "Checkout/UseShippingAddress",
+                type: "POST",
+                data: { id: 50 },
+                cache: false,
+                async: true,
+                success: function (data) {
+                    alert(data);
+                }
+            });
 	});
         </script>
         <!-- //skills -->

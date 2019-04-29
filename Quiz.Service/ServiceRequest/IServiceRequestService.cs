@@ -10,7 +10,7 @@ namespace Quiz.Service.ServiceRequest
     public interface IServiceRequestService
     {
 
-        dynamic ServiceRequestsList();
+        List<ServiceRequestViewModel> ServiceRequestsList();
         dynamic serviceRequest(int? id);
         bool SaveServiceRequests(ServiceRequestViewModel atten);
         bool DeleteserviceRequest(int id);

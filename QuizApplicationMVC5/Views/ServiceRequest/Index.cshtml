@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Quiz.Core.EntityModel.ServiceRequest>
+﻿@model IEnumerable<Quiz.ViewModel.ServiceRequestViewModel>
 
 @{
     /**/
@@ -49,6 +49,24 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.Email)
                                 </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ProductTybe)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Brand)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.DateOfRequest)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Address)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Pincode)
+                                </th>
                                 <th></th>
                             </tr>
 
@@ -56,20 +74,38 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.FirsName)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Email)
-                                    </td>
-                                    <td>
-                                        @Html.ActionLink("Edit", "Edit", new { Id = item.Id }) |
-                                        @Html.ActionLink("Details", "Details", new { Id = item.Id }) |
-                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.CID })*@
-                                        <i class="mdi mdi-delete" title="Delete" style="font-size:20px;color:red" onclick="btndelete(@item.Id)"></i>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FirsName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ProductTybe)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Brand)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DateOfRequest)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Address)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Pincode)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { Id = item.Id }) |
+                                    @Html.ActionLink("Details", "Details", new { Id = item.Id }) |
+                                    @*@Html.ActionLink("Delete", "Delete", new { id = item.CID })*@
+                                    <i class="mdi mdi-delete" title="Delete" style="font-size:20px;color:red" onclick="btndelete(@item.Id)"></i>
+                                </td>
+                            </tr>
                             }
                         </tbody>
                     </table>

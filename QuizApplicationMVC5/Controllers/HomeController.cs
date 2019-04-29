@@ -51,9 +51,15 @@ namespace QuizApplicationMVC5.Controllers
                 try
                 {
                     _IServiceRequestService.SaveServiceRequests(model);
-                    UserViewModel user = new UserViewModel();
+                    ServiceRequestViewModel user = new ServiceRequestViewModel();
                     user.Email = model.Email;
-                    user.FirstName = model.FirsName;
+                    user.FirsName = model.FirsName;
+                    user.PhoneNumber = model.PhoneNumber;
+                    user.ProductTybe = model.ProductTybe;
+                    user.Brand = model.Brand;
+                    user.DateOfRequest = model.DateOfRequest;
+                    user.Address = model.Address;
+                    user.Pincode = model.Pincode;
                     mailBody = RenderPartialToString("_Notify", user, ControllerContext);
                     _IMasterService.SendAccountCreatationEmail("Service Request Generated", mailBody, user, 101);
                     

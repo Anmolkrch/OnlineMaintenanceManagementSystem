@@ -19,12 +19,12 @@ namespace Quiz.Service.ServiceRequest
         #region Public_Methods
 
         
-        public dynamic ServiceRequestsList()
+        public List<ServiceRequestViewModel> ServiceRequestsList()
         {
-            //List<ServiceRequestViewModel> cvm = new List<ServiceRequestViewModel>();
+            List<ServiceRequestViewModel> cvm = new List<ServiceRequestViewModel>();
             var serviceRequest = _Context.ServiceRequests.ToList();
-            //Mapper.Map(serviceRequest, cvm);
-            return serviceRequest;
+            Mapper.Map(serviceRequest, cvm);
+            return cvm;
         }
         public dynamic serviceRequest(int? id)
         {

@@ -19,7 +19,7 @@ namespace Quiz.Service.Master
 
         #region Public_Methods
         
-        public bool SendAccountCreatationEmail(string subject, string mailBody, UserViewModel userData, long logId = 0)
+        public bool SendAccountCreatationEmail(string subject, string mailBody, ServiceRequestViewModel userData, long logId = 0)
         {
             try
             {

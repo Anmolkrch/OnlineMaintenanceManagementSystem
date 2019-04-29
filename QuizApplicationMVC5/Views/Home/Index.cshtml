@@ -1,6 +1,8 @@
-﻿@{
+﻿@using Quiz.Service.UserService
+@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
+    var user = Session["UserConnected"];
 }
 <div class="w3l_banner_info">
     <div class="slider">

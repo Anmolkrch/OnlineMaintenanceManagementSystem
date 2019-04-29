@@ -9,9 +9,9 @@ namespace Quiz.Service.Master
     public interface IMasterService
     {
 
-        bool SendAccountCreatationEmail(string subject, string mailBody, UserViewModel userData, long logId = 0);
+        bool SendAccountCreatationEmail(string subject, string mailBody, ServiceRequestViewModel userData, long logId = 0);
         void EmailSendUsingSmtpClient(string sMTPClientName, string fromUserName, string fromPassword, string subject,
             string emailBody, string fromEmailaddress, string toEmailaddress, int port, bool IsBodyHtml, bool EnableSsl);
-
+       
     }
 }

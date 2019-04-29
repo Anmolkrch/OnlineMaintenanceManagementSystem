@@ -92,7 +92,7 @@ namespace QuizApplicationMVC5.Controllers
                         else
                         {
                             Session["UserConnected"] = authenticatedUser;
-                            return RedirectToAction("SelectQuizz", "Quizz");
+                            return RedirectToAction("Index", "Home");
                         }
 
                     }
@@ -122,7 +122,7 @@ namespace QuizApplicationMVC5.Controllers
             //if (UserAuthenticate.IsAuthenticated)
             //    _userService.UserLogOff(UserAuthenticate.LogId);
             UserAuthenticate.Logout(System.Web.HttpContext.Current);
-            return RedirectToAction("Login", "Account");
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Unauthorized()

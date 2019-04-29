@@ -85,5 +85,9 @@ namespace MVCFinalProject.Controllers
 
             return RedirectToAction("Index");
         }
+        public ActionResult UserIndex(int UserId)
+        {
+            return View(_IServiceRequest.ServiceRequestsList().Where(x=>x.UserId== UserId));
+        }
     }
 }
