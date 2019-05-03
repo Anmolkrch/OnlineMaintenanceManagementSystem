@@ -102,12 +102,12 @@
                                     @Html.ValidationMessageFor(m => m.PhoneNumber)
                                 </div>
                                 @*<div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text bg-success text-white" id="basic-addon1"><i class="ti-user"></i></span>
-                                    </div>
-                                    @Html.TextBoxFor(m => m.DateOfRequest, new { @class = "form-control form-control-lg", @placeholder = "Date Of Request", @required = "" })
-                                    @Html.ValidationMessageFor(m => m.DateOfRequest)
-                                </div>*@
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text bg-success text-white" id="basic-addon1"><i class="ti-user"></i></span>
+                                        </div>
+                                        @Html.TextBoxFor(m => m.DateOfRequest, new { @class = "form-control form-control-lg", @placeholder = "Date Of Request", @required = "" })
+                                        @Html.ValidationMessageFor(m => m.DateOfRequest)
+                                    </div>*@
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text bg-success text-white" id="basic-addon1"><i class="ti-user"></i></span>
@@ -125,7 +125,7 @@
                     </div>
                     <!-- contact details -->
                     <!-- contact map grid -->
-                    <div class="col-lg-6  mt-lg-0 mt-5 map contact-right">
+                    <div class="col-lg-6   wthree-form-right">
 
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
@@ -180,12 +180,32 @@
                                         <strong>@ViewBag.Message</strong>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
                 </div>
             }
+        </div>
     </section>
 </section>
-
+<script src="~/Assets/js/jquery-1.7.1.min.js"></script>
+<script>
+    jQuery('form#ServiceRequestform').submit(function (e) {
+        debugger;
+   //....
+        var hiddnsessio = $('#hdnsession').val();
+        if (hiddnsessio == null || hiddnsessio == "" || hiddnsessio == "0") 
+   {
+      // stop submitting form
+            e.preventDefault();
+            $('#btnloginPopup').click();
+            $('#loginform').attr('action', '/Account/Login?ReturnUrl="@Model.ProductTybe"');
+            @*@ViewBag.ReturnUrl=@Model.ProductTybe;*@
+   }
+   else
+   {
+      jQuery('input#hiddeninput').val('somevalue');
+   }
+})
+</script>

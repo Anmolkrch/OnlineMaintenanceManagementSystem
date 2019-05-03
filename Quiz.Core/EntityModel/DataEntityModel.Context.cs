@@ -27,11 +27,16 @@ namespace Quiz.Core.EntityModel
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<ServiceRequest> ServiceRequests { get; set; }
+        public virtual DbSet<ServiceRequestStatu> ServiceRequestStatus { get; set; }
+        public virtual DbSet<tblEngineer> tblEngineers { get; set; }
+        public virtual DbSet<tblProduct> tblProducts { get; set; }
+        public virtual DbSet<tblProductMaintenance> tblProductMaintenances { get; set; }
+        public virtual DbSet<tblProductType> tblProductTypes { get; set; }
+        public virtual DbSet<tblSpairPart> tblSpairParts { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserDetail> UserDetails { get; set; }
         public virtual DbSet<UserType> UserTypes { get; set; }
-        public virtual DbSet<ServiceRequest> ServiceRequests { get; set; }
-        public virtual DbSet<ServiceRequestStatu> ServiceRequestStatus { get; set; }
     
         public virtual int spGetUsers()
         {

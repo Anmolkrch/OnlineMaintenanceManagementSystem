@@ -58,6 +58,10 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Master\MasterService.cs" />
     <Compile Include="Master\IMasterService.cs" />
+    <Compile Include="ProductMaintenanceService\IProductMaintenanceService.cs" />
+    <Compile Include="ProductMaintenanceService\ProductMaintenanceService.cs" />
+    <Compile Include="Product\IProductService.cs" />
+    <Compile Include="Product\ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceRequest\ServiceRequestService.cs" />
     <Compile Include="ServiceRequest\IServiceRequestService.cs" />

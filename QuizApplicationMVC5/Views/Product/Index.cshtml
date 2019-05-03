@@ -1,9 +1,10 @@
-﻿@model IEnumerable<Quiz.ViewModel.ServiceRequestViewModel>
+﻿
+@model IEnumerable<Quiz.ViewModel.ProductViewModel>
 
 @{
     /**/
 
-    ViewBag.Title = "Company";
+    ViewBag.Title = "Product";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -35,8 +36,8 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Service Request </h5>
-                       
+                        <h5 class="card-title">Product </h5>
+                        @Html.ActionLink("Add", "Edit", new { id = 0 })
 
                     </div>
 
@@ -44,28 +45,35 @@
                         <thead>
                             <tr>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.FirsName)
+                                    @Html.DisplayNameFor(model => model.ProductCode)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Email)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.PhoneNumber)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.ProductTybe)
+                                    @Html.DisplayNameFor(model => model.ProductType)
                                 </th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.Brand)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.DateOfRequest)
+                                    @Html.DisplayNameFor(model => model.SerialNumber)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Address)
+                                    @Html.DisplayNameFor(model => model.ProductName)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Pincode)
+                                    @Html.DisplayNameFor(model => model.Model)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ManufactureDate)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.OriginalCost)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.DateOfPurchase)
+                                </th>
+                               
+                                <th>
+                                    @Html.DisplayNameFor(model => model.YearOfWarranty)
                                 </th>
                                 <th></th>
                             </tr>
@@ -76,28 +84,34 @@
                             {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.FirsName)
+                                    @Html.DisplayFor(modelItem => item.ProductCode)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Email)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.PhoneNumber)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ProductTybe)
+                                    @Html.DisplayFor(modelItem => item.ProductType)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Brand)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.DateOfRequest)
+                                    @Html.DisplayFor(modelItem => item.SerialNumber)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Address)
+                                    @Html.DisplayFor(modelItem => item.ProductName)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Pincode)
+                                    @Html.DisplayFor(modelItem => item.Model)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ManufactureDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OriginalCost)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DateOfPurchase)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.YearOfWarranty)
                                 </td>
                                 <td>
                                     @Html.ActionLink("Edit", "Edit", new { Id = item.Id }) |
@@ -142,7 +156,7 @@
 
         $.ajax({ //Do an ajax post to the controller
             type: 'POST',
-            url: '/ServiceRequest/Delete/?id=' + $('#modal-btn-ok').attr("val"),
+            url: '/Product/Delete/?id=' + $('#modal-btn-ok').attr("val"),
             //data: JSON.stringify(JSONObject),
             contentType: "application/json; charset=utf-8",
             dataType: "json"

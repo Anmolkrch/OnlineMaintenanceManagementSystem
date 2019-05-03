@@ -63,6 +63,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\AccountViewModels.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\ProductMaintenanceViewModel.cs" />
+    <Compile Include="ViewModel\ProductViewModel.cs" />
     <Compile Include="ViewModel\ServiceRequestViewModel.cs" />
     <Compile Include="ViewModel\UserTypeViewModel.cs" />
     <Compile Include="ViewModel\UserViewModel.cs" />

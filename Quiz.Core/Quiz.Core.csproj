@@ -79,6 +79,21 @@
     <Compile Include="EntityModel\ServiceRequestStatu.cs">
       <DependentUpon>DataEntityModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityModel\tblEngineer.cs">
+      <DependentUpon>DataEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\tblProduct.cs">
+      <DependentUpon>DataEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\tblProductMaintenance.cs">
+      <DependentUpon>DataEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\tblProductType.cs">
+      <DependentUpon>DataEntityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityModel\tblSpairPart.cs">
+      <DependentUpon>DataEntityModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityModel\User.cs">
       <DependentUpon>DataEntityModel.tt</DependentUpon>
     </Compile>

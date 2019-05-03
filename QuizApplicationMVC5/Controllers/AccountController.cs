@@ -6,7 +6,7 @@ using Quiz.ViewModel;
 using System;
 using System.Collections;
 using System.Web.Mvc;
-
+using System.Web.Script.Serialization;
 
 namespace QuizApplicationMVC5.Controllers
 {
@@ -74,10 +74,15 @@ namespace QuizApplicationMVC5.Controllers
                 try
                 {
                     model.PasswordHash = SecurityHelper.CreatePasswordHash(model.Password, "");
-
+                    string result = "";
                     UserViewModel authenticatedUser = null;
                     authenticatedUser = _IUserService.LoginAuthentication(model);
-                   
+                    JavaScriptSerializer js = new JavaScriptSerializer();
+                    string jsonData = js.Serialize(returnUrl);
+                    if (!string.IsNullOrEmpty(returnUrl))
+                    {
+                         result = JsonConvert.DeserializeObject<string>(returnUrl);
+                    }
                     if (authenticatedUser != null)
                     {
                         string rememberme = (model.RememberMe) ? "true" : "false";
@@ -92,6 +97,11 @@ namespace QuizApplicationMVC5.Controllers
                         else
                         {
                             Session["UserConnected"] = authenticatedUser;
+                            if(!string.IsNullOrEmpty(result))
+                            {
+                                return RedirectToAction("ServiceRequest", "Home",new { Product= result });
+
+                            }
                             return RedirectToAction("Index", "Home");
                         }
 
@@ -122,6 +132,7 @@ namespace QuizApplicationMVC5.Controllers
             //if (UserAuthenticate.IsAuthenticated)
             //    _userService.UserLogOff(UserAuthenticate.LogId);
             UserAuthenticate.Logout(System.Web.HttpContext.Current);
+            Session["UserConnected"] = null;
             return RedirectToAction("Index", "Home");
         }
 

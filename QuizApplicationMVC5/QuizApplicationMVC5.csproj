@@ -211,6 +211,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ProductMaintenanceController.cs" />
     <Compile Include="Controllers\ServiceRequestController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1304,6 +1306,10 @@
     <Content Include="Views\ServiceRequest\Delete.cshtml" />
     <Content Include="Views\ServiceRequest\Details.cshtml" />
     <Content Include="Views\ServiceRequest\Edit.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\Edit.cshtml" />
+    <Content Include="Views\ProductMaintenance\Index.cshtml" />
+    <Content Include="Views\ProductMaintenance\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

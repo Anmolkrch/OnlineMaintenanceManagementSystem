@@ -43,9 +43,9 @@ namespace Quiz.Core.EntityModel
         public bool IsDeleted { get; set; }
         public Nullable<long> AssignedRegionId { get; set; }
     
-        public virtual UserDetail UserDetail { get; set; }
-        public virtual UserType UserType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ServiceRequest> ServiceRequests { get; set; }
+        public virtual UserDetail UserDetail { get; set; }
+        public virtual UserType UserType { get; set; }
     }
 }
