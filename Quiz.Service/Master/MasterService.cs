@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using Quiz.Core.EntityModel;
+using ServiceMaintanance.Core.EntityModel;
 using Quiz.ViewModel;
 using QuizModel.ViewModel;
 using System.Data.Entity;

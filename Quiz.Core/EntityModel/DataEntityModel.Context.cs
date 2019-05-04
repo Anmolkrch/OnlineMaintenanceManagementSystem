@@ -7,18 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Quiz.Core.EntityModel
+namespace ServiceMaintanance.Core.EntityModel
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Core.Objects;
-    using System.Linq;
     
-    public partial class EmployeeMGMTEntities : DbContext
+    public partial class ServiceMaintainanceEntities : DbContext
     {
-        public EmployeeMGMTEntities()
-            : base("name=EmployeeMGMTEntities")
+        public ServiceMaintainanceEntities()
+            : base("name=ServiceMaintainanceEntities")
         {
         }
     
@@ -33,14 +31,9 @@ namespace Quiz.Core.EntityModel
         public virtual DbSet<tblProduct> tblProducts { get; set; }
         public virtual DbSet<tblProductMaintenance> tblProductMaintenances { get; set; }
         public virtual DbSet<tblProductType> tblProductTypes { get; set; }
-        public virtual DbSet<tblSpairPart> tblSpairParts { get; set; }
+        public virtual DbSet<tblSparePart> tblSpareParts { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserDetail> UserDetails { get; set; }
         public virtual DbSet<UserType> UserTypes { get; set; }
-    
-        public virtual int spGetUsers()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spGetUsers");
-        }
     }
 }

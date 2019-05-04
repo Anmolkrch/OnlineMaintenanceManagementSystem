@@ -58,6 +58,8 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Master\MasterService.cs" />
     <Compile Include="Master\IMasterService.cs" />
+    <Compile Include="ProductType\IProductTypeService.cs" />
+    <Compile Include="ProductType\ProductTypeService.cs" />
     <Compile Include="ProductMaintenanceService\IProductMaintenanceService.cs" />
     <Compile Include="ProductMaintenanceService\ProductMaintenanceService.cs" />
     <Compile Include="Product\IProductService.cs" />
@@ -88,6 +90,9 @@
       <Project>{545e106b-d841-441d-9928-03eab18e00fa}</Project>
       <Name>Quiz.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SparePart\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

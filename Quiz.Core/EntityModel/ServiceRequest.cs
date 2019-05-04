@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Quiz.Core.EntityModel
+namespace ServiceMaintanance.Core.EntityModel
 {
     using System;
     using System.Collections.Generic;

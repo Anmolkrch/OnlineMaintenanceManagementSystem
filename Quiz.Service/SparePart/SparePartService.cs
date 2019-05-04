@@ -4,19 +4,18 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-
+using Quiz.Core.EntityModel;
 
 using System.Data.Entity;
 using Quiz.ViewModel;
-using ServiceMaintanance.Core.EntityModel;
 
-namespace Quiz.Service.ProductService
+namespace Quiz.Service.SparePartService
 {
 
-    public class ProductService : IProductService
+    public class SparePartService : ISparePartService
     {
        
-        private ServiceMaintainanceEntities _Context = new ServiceMaintainanceEntities();
+        private EmployeeMGMTEntities _Context = new EmployeeMGMTEntities();
         #region Public_Methods
 
         
@@ -46,7 +45,7 @@ namespace Quiz.Service.ProductService
         }
         public bool SaveProductRequests(ProductViewModel productRequest)
         {
-            ServiceMaintanance.Core.EntityModel.tblProduct tblProduct = new ServiceMaintanance.Core.EntityModel.tblProduct();
+            Quiz.Core.EntityModel.tblProduct tblProduct = new Quiz.Core.EntityModel.tblProduct();
             bool result = false;
             try
             {
@@ -87,7 +86,7 @@ namespace Quiz.Service.ProductService
             try
             {
 
-                ServiceMaintanance.Core.EntityModel.tblProduct productRequest = _Context.tblProducts.Find(id);
+                Quiz.Core.EntityModel.tblProduct productRequest = _Context.tblProducts.Find(id);
                 _Context.tblProducts.Remove(productRequest); ;
                 _Context.SaveChanges();
                 return true;
@@ -100,7 +99,7 @@ namespace Quiz.Service.ProductService
         }
         //public bool SaveServiceRequestsStatus(ProductViewModel serviceRequest)
         //{
-        //    ServiceMaintanance.Core.EntityModel.ServiceRequestStatu tblProductStatus = new ServiceMaintanance.Core.EntityModel.ServiceRequestStatu();
+        //    Quiz.Core.EntityModel.ServiceRequestStatu tblProductStatus = new Quiz.Core.EntityModel.ServiceRequestStatu();
         //    bool result = false;
         //    try
         //    {

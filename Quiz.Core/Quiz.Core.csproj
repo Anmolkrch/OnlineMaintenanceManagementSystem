@@ -7,8 +7,8 @@
     <ProjectGuid>{CE614D83-5E28-4D99-A690-81A7E5F16FF3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Quiz.Core</RootNamespace>
-    <AssemblyName>Quiz.Core</AssemblyName>
+    <RootNamespace>ServiceMaintanance.Core</RootNamespace>
+    <AssemblyName>ServiceMaintanance.Core</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>SAK</SccProjectName>
@@ -91,7 +91,7 @@
     <Compile Include="EntityModel\tblProductType.cs">
       <DependentUpon>DataEntityModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityModel\tblSpairPart.cs">
+    <Compile Include="EntityModel\tblSparePart.cs">
       <DependentUpon>DataEntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityModel\User.cs">

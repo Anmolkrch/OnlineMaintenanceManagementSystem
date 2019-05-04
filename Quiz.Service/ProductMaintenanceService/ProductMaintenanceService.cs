@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using Quiz.Core.EntityModel;
 
 using System.Data.Entity;
 using Quiz.ViewModel;
+using ServiceMaintanance.Core.EntityModel;
 
 namespace Quiz.Service.ProductMaintenanceService
 {
@@ -15,7 +15,7 @@ namespace Quiz.Service.ProductMaintenanceService
     public class ProductMaintenanceService : IProductMaintenanceService
     {
        
-        private EmployeeMGMTEntities _Context = new EmployeeMGMTEntities();
+        private ServiceMaintainanceEntities _Context = new ServiceMaintainanceEntities();
         #region Public_Methods
 
         
@@ -45,7 +45,7 @@ namespace Quiz.Service.ProductMaintenanceService
         }
         public bool SaveProductMaintenanceRequests(ProductMaintenanceViewModel ProductMaintenanceRequest)
         {
-            Quiz.Core.EntityModel.tblProductMaintenance tblProductMaintenance = new Quiz.Core.EntityModel.tblProductMaintenance();
+            ServiceMaintanance.Core.EntityModel.tblProductMaintenance tblProductMaintenance = new ServiceMaintanance.Core.EntityModel.tblProductMaintenance();
             bool result = false;
             try
             {
@@ -90,7 +90,7 @@ namespace Quiz.Service.ProductMaintenanceService
             try
             {
 
-                Quiz.Core.EntityModel.tblProductMaintenance productRequest = _Context.tblProductMaintenances.Find(id);
+                ServiceMaintanance.Core.EntityModel.tblProductMaintenance productRequest = _Context.tblProductMaintenances.Find(id);
                 _Context.tblProductMaintenances.Remove(productRequest); ;
                 _Context.SaveChanges();
                 return true;

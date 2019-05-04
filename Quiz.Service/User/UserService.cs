@@ -4,16 +4,16 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using Quiz.Core.EntityModel;
 using Quiz.ViewModel;
 using Quiz.Model.Master;
+using ServiceMaintanance.Core.EntityModel;
 
 namespace Quiz.Service.UserService
 {
     public class UserService : IUserService
     {
        
-        private EmployeeMGMTEntities _Context = new EmployeeMGMTEntities();
+        private ServiceMaintainanceEntities _Context = new ServiceMaintainanceEntities();
         #region Public_Methods
 
         /// <summary>
@@ -113,7 +113,7 @@ namespace Quiz.Service.UserService
         {
             bool status = false;
 
-            Quiz.Core.EntityModel.User users = new Quiz.Core.EntityModel.User();
+            ServiceMaintanance.Core.EntityModel.User users = new ServiceMaintanance.Core.EntityModel.User();
 
             Mapper.Map(userViewModel, users);
 

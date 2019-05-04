@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using Quiz.Core.EntityModel;
 
 using System.Data.Entity;
 using Quiz.ViewModel;
+using ServiceMaintanance.Core.EntityModel;
 
 namespace Quiz.Service.ServiceRequest
 {
@@ -15,7 +15,7 @@ namespace Quiz.Service.ServiceRequest
     public class ServiceRequestService : IServiceRequestService
     {
        
-        private EmployeeMGMTEntities _Context = new EmployeeMGMTEntities();
+        private ServiceMaintainanceEntities _Context = new ServiceMaintainanceEntities();
         #region Public_Methods
 
         
@@ -45,7 +45,7 @@ namespace Quiz.Service.ServiceRequest
         }
         public bool SaveServiceRequests(ServiceRequestViewModel serviceRequest)
         {
-            Quiz.Core.EntityModel.ServiceRequest tblServiceRequest = new Quiz.Core.EntityModel.ServiceRequest();
+            ServiceMaintanance.Core.EntityModel.ServiceRequest tblServiceRequest = new ServiceMaintanance.Core.EntityModel.ServiceRequest();
             bool result = false;
             try
             {
@@ -83,7 +83,7 @@ namespace Quiz.Service.ServiceRequest
             try
             {
 
-                Quiz.Core.EntityModel.ServiceRequest serviceRequest = _Context.ServiceRequests.Find(id);
+                ServiceMaintanance.Core.EntityModel.ServiceRequest serviceRequest = _Context.ServiceRequests.Find(id);
                 _Context.ServiceRequests.Remove(serviceRequest); ;
                 _Context.SaveChanges();
                 return true;
@@ -96,7 +96,7 @@ namespace Quiz.Service.ServiceRequest
         }
         public bool SaveServiceRequestsStatus(ServiceRequestViewModel serviceRequest)
         {
-            Quiz.Core.EntityModel.ServiceRequestStatu tblServiceRequestStatus = new Quiz.Core.EntityModel.ServiceRequestStatu();
+            ServiceMaintanance.Core.EntityModel.ServiceRequestStatu tblServiceRequestStatus = new ServiceMaintanance.Core.EntityModel.ServiceRequestStatu();
             bool result = false;
             try
             {

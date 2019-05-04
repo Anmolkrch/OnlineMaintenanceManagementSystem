@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="EmployeeMGMTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ServiceMaintainanceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ServiceRequest">
           <Key>
             <PropertyRef Name="Id" />
@@ -112,7 +112,7 @@
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="tblSpairPart">
+        <EntityType Name="tblSparePart">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -186,6 +186,30 @@
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
+        <Association Name="FK__engineerId_engineer__Id">
+          <End Role="tblEngineer" Type="Self.tblEngineer" Multiplicity="1" />
+          <End Role="tblProductMaintenance" Type="Self.tblProductMaintenance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEngineer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblProductMaintenance">
+              <PropertyRef Name="engineerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductId__Id">
+          <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="1" />
+          <End Role="tblProductMaintenance" Type="Self.tblProductMaintenance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProduct">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblProductMaintenance">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__ServiceRequest__User__Id">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="ServiceRequest" Type="Self.ServiceRequest" Multiplicity="*" />
@@ -234,18 +258,25 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Function Name="spGetUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <EntityContainer Name="EmployeeMGMTModelStoreContainer">
+        <EntityContainer Name="ServiceMaintainanceModelStoreContainer">
           <EntitySet Name="ServiceRequest" EntityType="Self.ServiceRequest" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ServiceRequestStatus" EntityType="Self.ServiceRequestStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblEngineer" EntityType="Self.tblEngineer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProduct" EntityType="Self.tblProduct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProductMaintenance" EntityType="Self.tblProductMaintenance" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProductType" EntityType="Self.tblProductType" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblSpairPart" EntityType="Self.tblSpairPart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblSparePart" EntityType="Self.tblSparePart" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserDetail" EntityType="Self.UserDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserType" EntityType="Self.UserType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__engineerId_engineer__Id" Association="Self.FK__engineerId_engineer__Id">
+            <End Role="tblEngineer" EntitySet="tblEngineer" />
+            <End Role="tblProductMaintenance" EntitySet="tblProductMaintenance" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductId__Id" Association="Self.FK__ProductId__Id">
+            <End Role="tblProduct" EntitySet="tblProduct" />
+            <End Role="tblProductMaintenance" EntitySet="tblProductMaintenance" />
+          </AssociationSet>
           <AssociationSet Name="FK__ServiceRequest__User__Id" Association="Self.FK__ServiceRequest__User__Id">
             <End Role="User" EntitySet="User" />
             <End Role="ServiceRequest" EntitySet="ServiceRequest" />
@@ -263,55 +294,27 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="EmployeeMGMTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="EmployeeMGMTEntities" annotation:LazyLoadingEnabled="true">
-          <FunctionImport Name="spGetUsers" />
-          <EntitySet Name="ServiceRequests" EntityType="EmployeeMGMTModel.ServiceRequest" />
-          <EntitySet Name="ServiceRequestStatus" EntityType="EmployeeMGMTModel.ServiceRequestStatu" />
-          <EntitySet Name="tblEngineers" EntityType="EmployeeMGMTModel.tblEngineer" />
-          <EntitySet Name="tblProducts" EntityType="EmployeeMGMTModel.tblProduct" />
-          <EntitySet Name="tblProductMaintenances" EntityType="EmployeeMGMTModel.tblProductMaintenance" />
-          <EntitySet Name="tblProductTypes" EntityType="EmployeeMGMTModel.tblProductType" />
-          <EntitySet Name="tblSpairParts" EntityType="EmployeeMGMTModel.tblSpairPart" />
-          <EntitySet Name="Users" EntityType="EmployeeMGMTModel.User" />
-          <EntitySet Name="UserDetails" EntityType="EmployeeMGMTModel.UserDetail" />
-          <EntitySet Name="UserTypes" EntityType="EmployeeMGMTModel.UserType" />
-          <AssociationSet Name="FK__ServiceRequest__User__Id" Association="EmployeeMGMTModel.FK__ServiceRequest__User__Id">
-            <End Role="User" EntitySet="Users" />
-            <End Role="ServiceRequest" EntitySet="ServiceRequests" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ServiceRequestStatus__Id" Association="EmployeeMGMTModel.FK__ServiceRequestStatus__Id">
-            <End Role="ServiceRequest" EntitySet="ServiceRequests" />
-            <End Role="ServiceRequestStatu" EntitySet="ServiceRequestStatus" />
-          </AssociationSet>
-          <AssociationSet Name="FK__UserDetail__User__Id" Association="EmployeeMGMTModel.FK__UserDetail__User__Id">
-            <End Role="User" EntitySet="Users" />
-            <End Role="UserDetail" EntitySet="UserDetails" />
-          </AssociationSet>
-          <AssociationSet Name="FK__UserTypeId__UserType__Id" Association="EmployeeMGMTModel.FK__UserTypeId__UserType__Id">
-            <End Role="UserType" EntitySet="UserTypes" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
-          </EntityContainer>
+      <Schema Namespace="ServiceMaintainanceModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="ServiceRequest">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="Int64" Nullable="false" />
-          <Property Name="FirsName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FirsName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ProductTybe" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProductTybe" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Brand" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="DateOfRequest" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Pincode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Complaint" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pincode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Complaint" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="CreatedBy" Type="Int64" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
@@ -319,8 +322,8 @@
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="EmployeeMGMTModel.FK__ServiceRequest__User__Id" FromRole="ServiceRequest" ToRole="User" />
-          <NavigationProperty Name="ServiceRequestStatus" Relationship="EmployeeMGMTModel.FK__ServiceRequestStatus__Id" FromRole="ServiceRequest" ToRole="ServiceRequestStatu" />
+          <NavigationProperty Name="User" Relationship="Self.FK__ServiceRequest__User__Id" FromRole="ServiceRequest" ToRole="User" />
+          <NavigationProperty Name="ServiceRequestStatus" Relationship="Self.FK__ServiceRequestStatus__Id" FromRole="ServiceRequest" ToRole="ServiceRequestStatus" />
         </EntityType>
         <EntityType Name="ServiceRequestStatu">
           <Key>
@@ -336,14 +339,14 @@
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="ServiceRequest" Relationship="EmployeeMGMTModel.FK__ServiceRequestStatus__Id" FromRole="ServiceRequestStatu" ToRole="ServiceRequest" />
+          <NavigationProperty Name="ServiceRequest" Relationship="Self.FK__ServiceRequestStatus__Id" FromRole="ServiceRequestStatus" ToRole="ServiceRequest" />
         </EntityType>
         <EntityType Name="tblEngineer">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="EngCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="EngDOJ" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="Int64" />
@@ -352,6 +355,7 @@
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblProductMaintenances" Relationship="Self.FK__engineerId_engineer__Id" FromRole="tblEngineer" ToRole="tblProductMaintenance" />
         </EntityType>
         <EntityType Name="tblProduct">
           <Key>
@@ -360,14 +364,14 @@
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ProductCode" Type="Int64" />
           <Property Name="ProductType" Type="Int32" Nullable="false" />
-          <Property Name="Brand" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="SerialNumber" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Model" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Brand" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SerialNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Model" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ManufactureDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="WarrantyTillDate" Type="DateTime" Precision="3" />
           <Property Name="YearOfWarranty" Type="Int32" Nullable="false" />
-          <Property Name="OriginalCost" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="OriginalCost" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DateOfPurchase" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int64" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
@@ -375,6 +379,7 @@
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblProductMaintenances" Relationship="Self.FK__ProductId__Id" FromRole="tblProduct" ToRole="tblProductMaintenance" />
         </EntityType>
         <EntityType Name="tblProductMaintenance">
           <Key>
@@ -392,13 +397,15 @@
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="tblEngineer" Relationship="Self.FK__engineerId_engineer__Id" FromRole="tblProductMaintenance" ToRole="tblEngineer" />
+          <NavigationProperty Name="tblProduct" Relationship="Self.FK__ProductId__Id" FromRole="tblProductMaintenance" ToRole="tblProduct" />
         </EntityType>
         <EntityType Name="tblProductType">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CreatedBy" Type="Int64" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedBy" Type="Int64" />
@@ -406,14 +413,14 @@
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
         </EntityType>
-        <EntityType Name="tblSpairPart">
+        <EntityType Name="tblSparePart">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Cost" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Cost" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CreatedBy" Type="Int64" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="ModifiedBy" Type="Int64" />
@@ -447,9 +454,9 @@
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <Property Name="AssignedRegionId" Type="Int64" />
-          <NavigationProperty Name="ServiceRequests" Relationship="EmployeeMGMTModel.FK__ServiceRequest__User__Id" FromRole="User" ToRole="ServiceRequest" />
-          <NavigationProperty Name="UserDetail" Relationship="EmployeeMGMTModel.FK__UserDetail__User__Id" FromRole="User" ToRole="UserDetail" />
-          <NavigationProperty Name="UserType" Relationship="EmployeeMGMTModel.FK__UserTypeId__UserType__Id" FromRole="User" ToRole="UserType" />
+          <NavigationProperty Name="ServiceRequests" Relationship="Self.FK__ServiceRequest__User__Id" FromRole="User" ToRole="ServiceRequest" />
+          <NavigationProperty Name="UserDetail" Relationship="Self.FK__UserDetail__User__Id" FromRole="User" ToRole="UserDetail" />
+          <NavigationProperty Name="UserType" Relationship="Self.FK__UserTypeId__UserType__Id" FromRole="User" ToRole="UserType" />
         </EntityType>
         <EntityType Name="UserDetail">
           <Key>
@@ -472,22 +479,22 @@
           <Property Name="PerAddress2" Type="String" MaxLength="700" FixedLength="false" Unicode="false" />
           <Property Name="CostPerMile" Type="Double" />
           <Property Name="CostPerMinute" Type="Double" />
-          <NavigationProperty Name="User" Relationship="EmployeeMGMTModel.FK__UserDetail__User__Id" FromRole="UserDetail" ToRole="User" />
+          <NavigationProperty Name="User" Relationship="Self.FK__UserDetail__User__Id" FromRole="UserDetail" ToRole="User" />
         </EntityType>
         <EntityType Name="UserType">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Users" Relationship="EmployeeMGMTModel.FK__UserTypeId__UserType__Id" FromRole="UserType" ToRole="User" />
+          <NavigationProperty Name="Users" Relationship="Self.FK__UserTypeId__UserType__Id" FromRole="UserType" ToRole="User" />
         </EntityType>
         <Association Name="FK__ServiceRequest__User__Id">
-          <End Type="EmployeeMGMTModel.User" Role="User" Multiplicity="1" />
-          <End Type="EmployeeMGMTModel.ServiceRequest" Role="ServiceRequest" Multiplicity="*" />
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ServiceRequest" Type="Self.ServiceRequest" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Id" />
@@ -498,20 +505,44 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__ServiceRequestStatus__Id">
-          <End Type="EmployeeMGMTModel.ServiceRequest" Role="ServiceRequest" Multiplicity="1" />
-          <End Type="EmployeeMGMTModel.ServiceRequestStatu" Role="ServiceRequestStatu" Multiplicity="*" />
+          <End Role="ServiceRequest" Type="Self.ServiceRequest" Multiplicity="1" />
+          <End Role="ServiceRequestStatus" Type="Self.ServiceRequestStatu" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ServiceRequest">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="ServiceRequestStatu">
+            <Dependent Role="ServiceRequestStatus">
               <PropertyRef Name="ServiceRequestId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__engineerId_engineer__Id">
+          <End Role="tblEngineer" Type="Self.tblEngineer" Multiplicity="1" />
+          <End Role="tblProductMaintenance" Type="Self.tblProductMaintenance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblEngineer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblProductMaintenance">
+              <PropertyRef Name="engineerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ProductId__Id">
+          <End Role="tblProduct" Type="Self.tblProduct" Multiplicity="1" />
+          <End Role="tblProductMaintenance" Type="Self.tblProductMaintenance" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblProduct">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tblProductMaintenance">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__UserDetail__User__Id">
-          <End Type="EmployeeMGMTModel.User" Role="User" Multiplicity="1" />
-          <End Type="EmployeeMGMTModel.UserDetail" Role="UserDetail" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserDetail" Type="Self.UserDetail" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="User">
               <PropertyRef Name="Id" />
@@ -522,8 +553,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__UserTypeId__UserType__Id">
-          <End Type="EmployeeMGMTModel.UserType" Role="UserType" Multiplicity="1" />
-          <End Type="EmployeeMGMTModel.User" Role="User" Multiplicity="*" />
+          <End Role="UserType" Type="Self.UserType" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserType">
               <PropertyRef Name="Id" />
@@ -533,205 +564,240 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        </Schema>
+        <EntityContainer Name="ServiceMaintainanceEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ServiceRequests" EntityType="Self.ServiceRequest" />
+          <EntitySet Name="ServiceRequestStatus" EntityType="Self.ServiceRequestStatu" />
+          <EntitySet Name="tblEngineers" EntityType="Self.tblEngineer" />
+          <EntitySet Name="tblProducts" EntityType="Self.tblProduct" />
+          <EntitySet Name="tblProductMaintenances" EntityType="Self.tblProductMaintenance" />
+          <EntitySet Name="tblProductTypes" EntityType="Self.tblProductType" />
+          <EntitySet Name="tblSpareParts" EntityType="Self.tblSparePart" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
+          <EntitySet Name="UserTypes" EntityType="Self.UserType" />
+          <AssociationSet Name="FK__ServiceRequest__User__Id" Association="Self.FK__ServiceRequest__User__Id">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ServiceRequest" EntitySet="ServiceRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ServiceRequestStatus__Id" Association="Self.FK__ServiceRequestStatus__Id">
+            <End Role="ServiceRequest" EntitySet="ServiceRequests" />
+            <End Role="ServiceRequestStatus" EntitySet="ServiceRequestStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__engineerId_engineer__Id" Association="Self.FK__engineerId_engineer__Id">
+            <End Role="tblEngineer" EntitySet="tblEngineers" />
+            <End Role="tblProductMaintenance" EntitySet="tblProductMaintenances" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ProductId__Id" Association="Self.FK__ProductId__Id">
+            <End Role="tblProduct" EntitySet="tblProducts" />
+            <End Role="tblProductMaintenance" EntitySet="tblProductMaintenances" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserDetail__User__Id" Association="Self.FK__UserDetail__User__Id">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserDetail" EntitySet="UserDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__UserTypeId__UserType__Id" Association="Self.FK__UserTypeId__UserType__Id">
+            <End Role="UserType" EntitySet="UserTypes" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="EmployeeMGMTModelStoreContainer" CdmEntityContainer="EmployeeMGMTEntities">
-          <FunctionImportMapping FunctionImportName="spGetUsers" FunctionName="EmployeeMGMTModel.Store.spGetUsers" />
+        <EntityContainerMapping StorageEntityContainer="ServiceMaintainanceModelStoreContainer" CdmEntityContainer="ServiceMaintainanceEntities">
           <EntitySetMapping Name="ServiceRequests">
-            <EntityTypeMapping TypeName="EmployeeMGMTModel.ServiceRequest">
+            <EntityTypeMapping TypeName="ServiceMaintainanceModel.ServiceRequest">
               <MappingFragment StoreEntitySet="ServiceRequest">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="Complaint" ColumnName="Complaint" />
-                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="DateOfRequest" ColumnName="DateOfRequest" />
-                <ScalarProperty Name="Brand" ColumnName="Brand" />
-                <ScalarProperty Name="ProductTybe" ColumnName="ProductTybe" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirsName" ColumnName="FirsName" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FirsName" ColumnName="FirsName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="ProductTybe" ColumnName="ProductTybe" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="DateOfRequest" ColumnName="DateOfRequest" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Pincode" ColumnName="Pincode" />
+                <ScalarProperty Name="Complaint" ColumnName="Complaint" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ServiceRequestStatus">
-            <EntityTypeMapping TypeName="EmployeeMGMTModel.ServiceRequestStatu">
+            <EntityTypeMapping TypeName="ServiceMaintainanceModel.ServiceRequestStatu">
               <MappingFragment StoreEntitySet="ServiceRequestStatus">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Comment" ColumnName="Comment" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="ServiceRequestId" ColumnName="ServiceRequestId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ServiceRequestId" ColumnName="ServiceRequestId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblEngineers">
-            <EntityTypeMapping TypeName="EmployeeMGMTModel.tblEngineer">
+            <EntityTypeMapping TypeName="ServiceMaintainanceModel.tblEngineer">
               <MappingFragment StoreEntitySet="tblEngineer">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="EngDOJ" ColumnName="EngDOJ" />
-                <ScalarProperty Name="EngCode" ColumnName="EngCode" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EngCode" ColumnName="EngCode" />
+                <ScalarProperty Name="EngDOJ" ColumnName="EngDOJ" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblProducts">
-            <EntityTypeMapping TypeName="EmployeeMGMTModel.tblProduct">
+            <EntityTypeMapping TypeName="ServiceMaintainanceModel.tblProduct">
               <MappingFragment StoreEntitySet="tblProduct">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="DateOfPurchase" ColumnName="DateOfPurchase" />
-                <ScalarProperty Name="OriginalCost" ColumnName="OriginalCost" />
-                <ScalarProperty Name="YearOfWarranty" ColumnName="YearOfWarranty" />
-                <ScalarProperty Name="WarrantyTillDate" ColumnName="WarrantyTillDate" />
-                <ScalarProperty Name="ManufactureDate" ColumnName="ManufactureDate" />
-                <ScalarProperty Name="Model" ColumnName="Model" />
-                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
-                <ScalarProperty Name="Brand" ColumnName="Brand" />
-                <ScalarProperty Name="ProductType" ColumnName="ProductType" />
-                <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+                <ScalarProperty Name="ProductType" ColumnName="ProductType" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ManufactureDate" ColumnName="ManufactureDate" />
+                <ScalarProperty Name="WarrantyTillDate" ColumnName="WarrantyTillDate" />
+                <ScalarProperty Name="YearOfWarranty" ColumnName="YearOfWarranty" />
+                <ScalarProperty Name="OriginalCost" ColumnName="OriginalCost" />
+                <ScalarProperty Name="DateOfPurchase" ColumnName="DateOfPurchase" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblProductMaintenances">
-            <EntityTypeMapping TypeName="EmployeeMGMTModel.tblProductMaintenance">
+            <EntityTypeMapping TypeName="ServiceMaintainanceModel.tblProductMaintenance">
               <MappingFragment StoreEntitySet="tblProductMaintenance">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Cost" ColumnName="Cost" />
-                <ScalarProperty Name="SpairPartId" ColumnName="SpairPartId" />
-                <ScalarProperty Name="DateOfService" ColumnName="DateOfService" />
-                <ScalarProperty Name="engineerId" ColumnName="engineerId" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="engineerId" ColumnName="engineerId" />
+                <ScalarProperty Name="DateOfService" ColumnName="DateOfService" />
+                <ScalarProperty Name="SpairPartId" ColumnName="SpairPartId" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblProductTypes">
-            <EntityTypeMapping TypeName="EmployeeMGMTModel.tblProductType">
+            <EntityTypeMapping TypeName="ServiceMaintainanceModel.tblProductType">
               <MappingFragment StoreEntitySet="tblProductType">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblSpairParts">
-            <EntityTypeMapping TypeName="EmployeeMGMTModel.tblSpairPart">
-              <MappingFragment StoreEntitySet="tblSpairPart">
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Cost" ColumnName="Cost" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
+          <EntitySetMapping Name="tblSpareParts">
+            <EntityTypeMapping TypeName="ServiceMaintainanceModel.tblSparePart">
+              <MappingFragment StoreEntitySet="tblSparePart">
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="EmployeeMGMTModel.User">
+            <EntityTypeMapping TypeName="ServiceMaintainanceModel.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="AssignedRegionId" ColumnName="AssignedRegionId" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="ReportingTo" ColumnName="ReportingTo" />
-                <ScalarProperty Name="AccountStatus" ColumnName="AccountStatus" />
-                <ScalarProperty Name="IsOnLine" ColumnName="IsOnLine" />
-                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
-                <ScalarProperty Name="DefaultPassword" ColumnName="DefaultPassword" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="SaltKey" ColumnName="SaltKey" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="WorkPhone" ColumnName="WorkPhone" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserTypeId" ColumnName="UserTypeId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="WorkPhone" ColumnName="WorkPhone" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="SaltKey" ColumnName="SaltKey" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="DefaultPassword" ColumnName="DefaultPassword" />
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+                <ScalarProperty Name="IsOnLine" ColumnName="IsOnLine" />
+                <ScalarProperty Name="AccountStatus" ColumnName="AccountStatus" />
+                <ScalarProperty Name="ReportingTo" ColumnName="ReportingTo" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="AssignedRegionId" ColumnName="AssignedRegionId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserDetails">
-            <EntityTypeMapping TypeName="EmployeeMGMTModel.UserDetail">
+            <EntityTypeMapping TypeName="ServiceMaintainanceModel.UserDetail">
               <MappingFragment StoreEntitySet="UserDetail">
-                <ScalarProperty Name="CostPerMinute" ColumnName="CostPerMinute" />
-                <ScalarProperty Name="CostPerMile" ColumnName="CostPerMile" />
-                <ScalarProperty Name="PerAddress2" ColumnName="PerAddress2" />
-                <ScalarProperty Name="PerAddress1" ColumnName="PerAddress1" />
-                <ScalarProperty Name="PerZipCode" ColumnName="PerZipCode" />
-                <ScalarProperty Name="PerCity" ColumnName="PerCity" />
-                <ScalarProperty Name="PerState" ColumnName="PerState" />
-                <ScalarProperty Name="PerCountry" ColumnName="PerCountry" />
-                <ScalarProperty Name="CurAddress2" ColumnName="CurAddress2" />
-                <ScalarProperty Name="CurAddress1" ColumnName="CurAddress1" />
-                <ScalarProperty Name="CurZipCode" ColumnName="CurZipCode" />
-                <ScalarProperty Name="CurCity" ColumnName="CurCity" />
-                <ScalarProperty Name="CurState" ColumnName="CurState" />
-                <ScalarProperty Name="CurCountry" ColumnName="CurCountry" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="CurCountry" ColumnName="CurCountry" />
+                <ScalarProperty Name="CurState" ColumnName="CurState" />
+                <ScalarProperty Name="CurCity" ColumnName="CurCity" />
+                <ScalarProperty Name="CurZipCode" ColumnName="CurZipCode" />
+                <ScalarProperty Name="CurAddress1" ColumnName="CurAddress1" />
+                <ScalarProperty Name="CurAddress2" ColumnName="CurAddress2" />
+                <ScalarProperty Name="PerCountry" ColumnName="PerCountry" />
+                <ScalarProperty Name="PerState" ColumnName="PerState" />
+                <ScalarProperty Name="PerCity" ColumnName="PerCity" />
+                <ScalarProperty Name="PerZipCode" ColumnName="PerZipCode" />
+                <ScalarProperty Name="PerAddress1" ColumnName="PerAddress1" />
+                <ScalarProperty Name="PerAddress2" ColumnName="PerAddress2" />
+                <ScalarProperty Name="CostPerMile" ColumnName="CostPerMile" />
+                <ScalarProperty Name="CostPerMinute" ColumnName="CostPerMinute" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserTypes">
-            <EntityTypeMapping TypeName="EmployeeMGMTModel.UserType">
+            <EntityTypeMapping TypeName="ServiceMaintainanceModel.UserType">
               <MappingFragment StoreEntitySet="UserType">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="Code" ColumnName="Code" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          </EntityContainerMapping>
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

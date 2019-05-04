@@ -7,12 +7,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Quiz.Core.EntityModel
+namespace ServiceMaintanance.Core.EntityModel
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class tblSpairPart
+    public partial class tblSparePart
     {
         public long Id { get; set; }
         public string Name { get; set; }

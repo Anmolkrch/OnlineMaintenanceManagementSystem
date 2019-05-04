@@ -4,74 +4,70 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-
+using ServiceMaintanance.Core.EntityModel;
 
 using System.Data.Entity;
 using Quiz.ViewModel;
-using ServiceMaintanance.Core.EntityModel;
+using Quiz.Model.ViewModel;
 
-namespace Quiz.Service.ProductService
+namespace Quiz.Service.ProductTypeService
 {
 
-    public class ProductService : IProductService
+    public class ProductTypeService : IProductTypeService
     {
        
         private ServiceMaintainanceEntities _Context = new ServiceMaintainanceEntities();
         #region Public_Methods
 
         
-        public List<ProductViewModel> ProductList()
+        public List<ProductTypeViewModel> ProductTypeList()
         {
-            List<ProductViewModel> cvm = new List<ProductViewModel>();
-            var ProductRequest = _Context.tblProducts.ToList();
-            Mapper.Map(ProductRequest, cvm);
+            List<ProductTypeViewModel> cvm = new List<ProductTypeViewModel>();
+            var ProductTypeRequest = _Context.tblProductTypes.ToList();
+            Mapper.Map(ProductTypeRequest, cvm);
             return cvm;
         }
-        public dynamic ProductRequest(int? id)
+        public dynamic ProductTypeRequest(int? id)
         {
-            ProductViewModel productRequest = new ProductViewModel();
+            ProductTypeViewModel ProductTypeRequest = new ProductTypeViewModel();
             try
             {
                 if (id != 0 && id != null)
                 {
-                   var ProductRequest = _Context.tblProducts.Find(id);
-                    Mapper.Map(ProductRequest, productRequest);
+                   var Product = _Context.tblProductTypes.Find(id);
+                    Mapper.Map(Product, ProductTypeRequest);
                 }
             }
             catch (Exception EX)
             {
 
             }
-            return productRequest;
+            return ProductTypeRequest;
         }
-        public bool SaveProductRequests(ProductViewModel productRequest)
+        public bool SaveProductTypeRequests(ProductTypeViewModel ProductTypeRequest)
         {
-            ServiceMaintanance.Core.EntityModel.tblProduct tblProduct = new ServiceMaintanance.Core.EntityModel.tblProduct();
+            ServiceMaintanance.Core.EntityModel.tblProductType tblProductType = new ServiceMaintanance.Core.EntityModel.tblProductType();
             bool result = false;
             try
             {
-                if (productRequest.Id == 0)
+                if (ProductTypeRequest.Id == 0)
                 {
-                    Mapper.Map(productRequest, tblProduct);
+                    Mapper.Map(ProductTypeRequest, tblProductType);
                     
-                    tblProduct.CreatedOn = DateTime.Now;
-                    if (tblProduct.ManufactureDate== DateTime.MinValue)
-                    {
-                        tblProduct.DateOfPurchase = DateTime.Now;
-                        tblProduct.ManufactureDate = DateTime.Now;
-                    }
-                    tblProduct.CreatedOn = DateTime.Now;
-                    tblProduct.CreatedBy = 101;
-                    tblProduct.IsActive = true;
-                    tblProduct.IsDeleted = false;
-                    _Context.tblProducts.Add(tblProduct);
+                    tblProductType.CreatedOn = DateTime.Now;
+                   
+                    tblProductType.CreatedOn = DateTime.Now;
+                    tblProductType.CreatedBy = 101;
+                    tblProductType.IsActive = true;
+                    tblProductType.IsDeleted = false;
+                    _Context.tblProductTypes.Add(tblProductType);
                     _Context.SaveChanges();
                     result = true;
                 }
                 else
                 {
-                    Mapper.Map(productRequest, tblProduct);
-                    _Context.Entry(tblProduct).State = EntityState.Modified;
+                    Mapper.Map(ProductTypeRequest, tblProductType);
+                    _Context.Entry(tblProductType).State = EntityState.Modified;
                     _Context.SaveChanges();
                     result = true;
                 }
@@ -82,13 +78,13 @@ namespace Quiz.Service.ProductService
             }
            return result;
         }
-        public bool DeleteProductRequest(int id)
+        public bool DeleteProductTypeRequest(int id)
         {
             try
             {
 
-                ServiceMaintanance.Core.EntityModel.tblProduct productRequest = _Context.tblProducts.Find(id);
-                _Context.tblProducts.Remove(productRequest); ;
+                ServiceMaintanance.Core.EntityModel.tblProductType ProductTypeRequest = _Context.tblProductTypes.Find(id);
+                _Context.tblProductTypes.Remove(ProductTypeRequest); ;
                 _Context.SaveChanges();
                 return true;
             }

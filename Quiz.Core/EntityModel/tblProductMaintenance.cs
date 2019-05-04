@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Quiz.Core.EntityModel
+namespace ServiceMaintanance.Core.EntityModel
 {
     using System;
     using System.Collections.Generic;
@@ -26,5 +26,8 @@ namespace Quiz.Core.EntityModel
         public Nullable<System.DateTime> ModifiedOn { get; set; }
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
+    
+        public virtual tblEngineer tblEngineer { get; set; }
+        public virtual tblProduct tblProduct { get; set; }
     }
 }

@@ -7,13 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Quiz.Core.EntityModel
+namespace ServiceMaintanance.Core.EntityModel
 {
     using System;
     using System.Collections.Generic;
     
     public partial class tblEngineer
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tblEngineer()
+        {
+            this.tblProductMaintenances = new HashSet<tblProductMaintenance>();
+        }
+    
         public long Id { get; set; }
         public string Name { get; set; }
         public string EngCode { get; set; }
@@ -24,5 +30,8 @@ namespace Quiz.Core.EntityModel
         public Nullable<System.DateTime> ModifiedOn { get; set; }
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblProductMaintenance> tblProductMaintenances { get; set; }
     }
 }
