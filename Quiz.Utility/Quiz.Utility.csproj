@@ -65,17 +65,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Quiz.Model\Quiz.Model.csproj">
-      <Project>{545e106b-d841-441d-9928-03eab18e00fa}</Project>
-      <Name>React.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Quiz.Service\Quiz.Service.csproj">
-      <Project>{f7024d1f-0a3c-427a-9ce7-d9ca88254978}</Project>
-      <Name>React.Service</Name>
-    </ProjectReference>
+    <Content Include="TextFile1.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="TextFile1.txt" />
+    <ProjectReference Include="..\ServiceMaintanance.Model\ServiceMaintanance.Model.csproj">
+      <Project>{5ADB3726-7937-42F7-AD87-3B09E443DAC1}</Project>
+      <Name>ServiceMaintanance.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceMaintanance.Service\ServiceMaintanance.Service.csproj">
+      <Project>{EB966CFA-5DB2-47B7-B417-9068DC2D1EC4}</Project>
+      <Name>ServiceMaintanance.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,14 +1,15 @@
-﻿using Quiz.ViewModel;
-using Quiz.Service.ProductMaintenanceService;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Quiz.Service.ProductService;
+using ServiceMaintanance.Service.ProductMaintenanceService;
+using ServiceMaintanance.Service.ProductService;
+using ServiceMaintanance.ViewModel;
 
-namespace QuizApplicationMVC5.Controllers
+namespace ServiceMaintananceApplicationMVC5.Controllers
 {
     public class ProductMaintenanceController : Controller
     {

@@ -1,8 +1,7 @@
-﻿using Quiz.ViewModel;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
-using Quiz.Model.Master;
 using Quiz.Utility.Helper;
+using ServiceMaintanance.Model.Master;
 
 namespace Quiz.Utility.Helper
 {

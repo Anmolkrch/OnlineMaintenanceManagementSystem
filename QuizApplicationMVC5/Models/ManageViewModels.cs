@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
-namespace QuizApplicationMVC5.Models
+namespace ServiceMaintananceApplicationMVC5.Models
 {
     public class IndexViewModel
     {

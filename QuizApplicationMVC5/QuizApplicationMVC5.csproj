@@ -1292,9 +1292,6 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Manage.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
-    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
@@ -1332,17 +1329,17 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Quiz.Model\Quiz.Model.csproj">
-      <Project>{545e106b-d841-441d-9928-03eab18e00fa}</Project>
-      <Name>Quiz.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Quiz.Service\Quiz.Service.csproj">
-      <Project>{f7024d1f-0a3c-427a-9ce7-d9ca88254978}</Project>
-      <Name>Quiz.Service</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Quiz.Utility\Quiz.Utility.csproj">
       <Project>{93325227-a8ca-423b-b380-63e9df996a84}</Project>
       <Name>Quiz.Utility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceMaintanance.Model\ServiceMaintanance.Model.csproj">
+      <Project>{5ADB3726-7937-42F7-AD87-3B09E443DAC1}</Project>
+      <Name>ServiceMaintanance.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceMaintanance.Service\ServiceMaintanance.Service.csproj">
+      <Project>{EB966CFA-5DB2-47B7-B417-9068DC2D1EC4}</Project>
+      <Name>ServiceMaintanance.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

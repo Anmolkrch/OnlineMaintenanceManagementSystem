@@ -1,5 +1,6 @@
-﻿using Quiz.Service.ProductService;
-using Quiz.ViewModel;
+﻿
+using ServiceMaintanance.Service.ProductService;
+using ServiceMaintanance.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
-namespace QuizApplicationMVC5.Controllers
+namespace ServiceMaintananceApplicationMVC5.Controllers
 {
     public class ProductController : Controller
     {

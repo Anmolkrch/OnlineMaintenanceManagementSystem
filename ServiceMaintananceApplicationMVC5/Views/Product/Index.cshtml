@@ -1,0 +1,174 @@
+﻿
+@model IEnumerable<Quiz.ViewModel.ProductViewModel>
+
+@{
+    /**/
+
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-wrapper">
+    <!-- ============================================================== -->
+    <!-- Bread crumb and right sidebar toggle -->
+    <!-- ============================================================== -->
+    <div class="page-breadcrumb">
+        <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+                <h4 class="page-title">Dashboard</h4>
+                <div class="ml-auto text-right">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Library</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Product </h5>
+                        @Html.ActionLink("Add", "Edit", new { id = 0 })
+
+                    </div>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ProductCode)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ProductType)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Brand)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.SerialNumber)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ProductName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Model)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ManufactureDate)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.OriginalCost)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.DateOfPurchase)
+                                </th>
+                               
+                                <th>
+                                    @Html.DisplayNameFor(model => model.YearOfWarranty)
+                                </th>
+                                <th></th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ProductCode)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ProductType)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Brand)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SerialNumber)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ProductName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Model)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ManufactureDate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.OriginalCost)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DateOfPurchase)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.YearOfWarranty)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { Id = item.Id }) |
+                                    @Html.ActionLink("Details", "Details", new { Id = item.Id }) |
+                                    @*@Html.ActionLink("Delete", "Delete", new { id = item.CID })*@
+                                    <i class="mdi mdi-delete" title="Delete" style="font-size:20px;color:red" onclick="btndelete(@item.Id)"></i>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Do you want to delete this </h4>
+            </div>
+            <div class="modal-footer">
+                @*<a class="btn btn-default" id="modal-btn-ok" href="~/Employee_Type/delete">Yes</a>*@
+                <button type="button" class="btn btn-default" id="modal-btn-ok" val='' onclick="OkClick()">Yes</button>
+                <button type="button" class="btn btn-primary" id="modal-btn-no" onclick="OnCancel()">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function btndelete(id) {
+
+        $("#mi-modal").modal('show');
+        $('#modal-btn-ok').attr('val', id);
+    };
+
+    function OkClick() {
+
+        $.ajax({ //Do an ajax post to the controller
+            type: 'POST',
+            url: '/Product/Delete/?id=' + $('#modal-btn-ok').attr("val"),
+            //data: JSON.stringify(JSONObject),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        });
+
+        $("#mi-modal").modal('hide');
+        location.reload();
+    };
+
+    function OnCancel() {
+        //callback(false);
+        $("#mi-modal").modal('hide');
+        debugger;
+    };
+</script>

@@ -2,7 +2,7 @@
 
 @{
     int UserId = 0;
-    var User = Session["UserConnected"] as Quiz.ViewModel.UserViewModel;
+    var User = Session["UserConnected"] as ServiceMaintanance.ViewModel.UserViewModel;
     if(User!=null)
     {
         UserId = (int)User.Id;

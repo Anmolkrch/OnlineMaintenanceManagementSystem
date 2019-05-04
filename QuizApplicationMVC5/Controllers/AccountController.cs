@@ -1,14 +1,14 @@
 ﻿using Newtonsoft.Json;
-using Quiz.Model.Master;
-using Quiz.Service.UserService;
 using Quiz.Utility.Helper;
-using Quiz.ViewModel;
+using ServiceMaintanance.Model.Master;
+using ServiceMaintanance.Service.UserService;
+using ServiceMaintanance.ViewModel;
 using System;
 using System.Collections;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 
-namespace QuizApplicationMVC5.Controllers
+namespace ServiceMaintananceApplicationMVC5.Controllers
 {
     [HandleError]
     public class AccountController : Controller
@@ -30,7 +30,7 @@ namespace QuizApplicationMVC5.Controllers
             {
                 var jsonData = SecurityHelper.Decrypt(HttpContext.Request.Cookies["ES"]["US"].ToString());
                 Hashtable decryptedData = JsonConvert.DeserializeObject<Hashtable>(jsonData);
-                UserService _IUserService = new UserService();
+                
 
                 var user = _IUserService.GetUsersDetailsById(Convert.ToInt64(decryptedData["LogId"]));
                 if (user.Id!=0)

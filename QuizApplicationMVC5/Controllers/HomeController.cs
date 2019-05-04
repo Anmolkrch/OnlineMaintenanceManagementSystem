@@ -1,6 +1,7 @@
-﻿using Quiz.Service.Master;
-using Quiz.Service.ServiceRequest;
-using Quiz.ViewModel;
+﻿
+using ServiceMaintanance.Service.Master;
+using ServiceMaintanance.Service.ServiceRequest;
+using ServiceMaintanance.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,7 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace QuizApplicationMVC5.Controllers
+namespace ServiceMaintananceApplicationMVC5.Controllers
 {
     public class HomeController : Controller
     {

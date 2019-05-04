@@ -1,0 +1,196 @@
+﻿@using Quiz.Service.UserService
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+    var user = Session["UserConnected"];
+}
+<div class="w3l_banner_info">
+    <div class="slider">
+        <div class="callbacks_container">
+            <ul class="rslides" id="slider3">
+                <li>
+                    <div class="slider-img">
+                        <div class="slider_banner_info">
+                            <div class="text">
+                                <h3 class="word wisteria">We Are The Best Home Service For Making Your Home Shine</h3>
+                                <p>A good way to start your search for the best maintenance management system</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="slider-img-2">
+                        <div class="slider_banner_info">
+                            <div class="text">
+                                <h3 class="word wisteria">Book You Slot As Your Conveyance</h3>
+                                <p>A good way to start your search for the best maintenance management system</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="slider-img-3">
+                        <div class="slider_banner_info">
+                            <div class="text">
+                                <h3 class="word wisteria">We Provide To Maintanance And Repair For Your Electronics Products</h3>
+                                <p>A good way to start your search for the best maintenance management system</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="slider-img-4">
+                        <div class="slider_banner_info">
+                            <div class="text">
+                                <h3 class="word wisteria">Get Fast And Cheap service At Your DoreStep</h3>
+                                <p>A good way to start your search for the best maintenance management system</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<section class="bannerbottom py-lg-5 py-md-4 py-md-3 py-2">
+    <div class="bannerbottom py-lg-5 py-md-4 py-md-3 py-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-12 w3_ban1">
+                    <div class="card">
+                        <img class="card-img-top" src="../Assets/images/IMG/tv.jpg" alt="Card image cap" style="height:250px;">
+                        <div class="card-body">
+                            <h5 class="card-title">LED TV </h5>
+                            <a href="@Url.Action("ServiceRequest", "Home", new { Product = "TV" })" class="btn btn-primary">Request</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-12 w3_ban1">
+                    <div class="card">
+                        <img class="card-img-top" src="../Assets/images/IMG/wa.jpg" alt="Card image cap" style="height:250px;">
+                        <div class="card-body">
+                            <h5 class="card-title">Washing Machine</h5>
+                            <a href="@Url.Action("ServiceRequest", "Home", new { Product ="Washing Machine" })" class="btn btn-primary">Request</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-12 w3_ban1">
+                    <div class="card">
+                        <img class="card-img-top" src="../Assets/images/IMG/rf.jpg" alt="Card image cap" style="height:250px;">
+                        <div class="card-body">
+                            <h5 class="card-title">Refrigerator</h5>
+                            <a href="@Url.Action("ServiceRequest", "Home", new { Product ="Refrigerator," })" class="btn btn-primary">Request</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-12 w3_ban">
+                    <div class="card">
+                        <img class="card-img-top" src="../Assets/images/IMG/ac.jpeg" alt="Card image cap" style="height:250px;">
+                        <div class="card-body">
+                            <h5 class="card-title">Air Conditioners</h5>
+                            <a href="@Url.Action("ServiceRequest", "Home", new { Product ="Air Conditioners" })" class="btn btn-primary">Request</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-12 w3_ban1">
+                    <div class="card">
+                        <img class="card-img-top" src="../Assets/images/IMG/lp.png" alt="Card image cap" style="height:250px;">
+                        <div class="card-body">
+                            <h5 class="card-title">Laptop</h5>
+                            <a href="@Url.Action("ServiceRequest", "Home", new { Product ="Laptop" })" class="btn btn-primary">Request</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-12 w3_ban1">
+                    <div class="card">
+                        <img class="card-img-top" src="../Assets/images/IMG/co.png" alt="Card image cap" style="height:250px;">
+                        <div class="card-body">
+                            <h5 class="card-title">Air Coolers</h5>
+                            <a href="@Url.Action("ServiceRequest", "Home", new { Product ="Air Coolers" })" class="btn btn-primary">Request</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-12 w3_ban1">
+                    <div class="card">
+                        <img class="card-img-top" src="../Assets/images/IMG/ca.jpg" alt="Card image cap" style="height:250px;">
+                        <div class="card-body">
+                            <h5 class="card-title">Camera</h5>
+                            <a href="@Url.Action("ServiceRequest", "Home", new { Product ="Camera" })" class="btn btn-primary">Request</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-12 w3_ban">
+                    <div class="card">
+                        <img class="card-img-top" src="../Assets/images/IMG/mv.jpg" alt="Card image cap" style="height:250px;">
+                        <div class="card-body">
+                            <h5 class="card-title">Microwave Ovens</h5>
+                            <a href="@Url.Action("ServiceRequest", "Home", new { Product ="Microwave Ovens" })" class="btn btn-primary">Request</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact -->
+<section class="contact py-lg-5 py-md-4 py-md-3 py-2">
+    <div class="container py-lg-5 py-md-4 py-md-3 py-2">
+        <div class="w3_mg">
+            <h3>Maintainance Service</h3>
+            <p class=" my-lg-4 my-md-3 my-sm-2 my-2">A good way to start your search for the best maintenance management system.</p>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="@Url.Action("ServiceRequest", "Home", new { Product ="Laptop" })exampleModal">
+                Conatct Page
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Maintainance Service</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="contact" id="contact">
+                                <div class="container">
+                                    <h3 class="title clr">CONTACT FORM</h3>
+                                    <div class=" contact-form">
+                                        <form action="@Url.Action("ServiceRequest", "Home", new { Product ="Laptop" })" method="post">
+                                            <div class="row contact-bothside-agileinfo">
+                                                <div class="col-md-6 col-sm-6 col-xs-6 form-right form-left">
+                                                    <input type="text" name="Name" placeholder="Name" required="">
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-6 form-right ">
+                                                    <input type="text" name="Last name" placeholder="Last name" required="">
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-6 form-right form-left">
+                                                    <input type="email" name="Email" placeholder="Email" required="">
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-6 form-right ">
+                                                    <input type="text" name="phone" placeholder="Phone" required="">
+                                                </div>
+                                                <textarea name="Message" placeholder="Message" required=""></textarea>
+                                                <input type="submit" value="SUBMIT">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- /Conatct -->
